@@ -1,16 +1,16 @@
 /* eslint-disable react/prop-types */
-import React, { useEffect } from "react";
+import React, { useEffect } from 'react';
 import {
   View,
   SafeAreaView,
   Image,
   Text,
   TouchableOpacity,
-} from "react-native";
-import { StatusBar } from "expo-status-bar";
+} from 'react-native';
+import { StatusBar } from 'expo-status-bar';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires, no-undef
-const plogging_image = require("../../../assets/image/homePlogging.png");
+const plogging_image = require('../../../assets/image/homePlogging.png');
 
 const Home = ({ navigation }) => {
   return (
@@ -31,7 +31,7 @@ const Home = ({ navigation }) => {
         </View>
       </View>
       <TouchableOpacity
-        onPress={() => navigation.replace("map")}
+        onPress={() => navigation.replace('map')}
         className="bg-green shadow-md w-40 h-40 rounded-full mt-32 justify-center items-center"
       >
         <Text className="text-white text-2xl font-bold">플로깅</Text>
