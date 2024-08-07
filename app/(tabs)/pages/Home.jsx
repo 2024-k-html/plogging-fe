@@ -16,6 +16,12 @@ const Home = ({ navigation }) => {
   return (
     <SafeAreaView className="flex-1 bg-white items-center">
       <StatusBar style="dark" />
+      <View
+        style={styles.topContainer}
+        className="py-4 w-full border-b border-gray items-center"
+      >
+        <Text className="text-xl">플로깅 시작하기</Text>
+      </View>
       <Image source={plogging_image} className="resize-contain" />
       <View className="bg-white border rounded-xl w-4/5 p-3 absolute top-64">
         <Text className="pl-2 mb-3">현재까지</Text>
@@ -42,6 +48,12 @@ const Home = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
+  safeAreaView: {
+    backgroundColor: '#fff',
+  },
+  current: {
+    backgroundColor: '#fff',
+  },
   green: {
     color: '#2DB400',
   },
@@ -50,6 +62,9 @@ const styles = StyleSheet.create({
   },
   startText: {
     color: '#fff',
+  },
+  topContainer: {
+    backgroundColor: '#fff',
   },
 });
 
