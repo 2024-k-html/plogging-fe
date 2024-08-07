@@ -1,4 +1,6 @@
 import React from "react";
+import { createStackNavigator } from "@react-navigation/stack";
+
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { NavigationContainer } from "@react-navigation/native";
 import Home from "./pages/Home";
@@ -34,7 +36,13 @@ const HomeStack = () => {
           headerShown: false,
         }}
       />
-      <Stack.Screen name="home" component={Home} />
+      <Stack.Screen
+        name="home"
+        component={Home}
+        options={{
+          headerShown: false,
+        }}
+      />
       <Stack.Screen name="ranking" component={Ranking} />
       <Stack.Screen name="gather" component={Gather} />
       <Stack.Screen
@@ -77,7 +85,7 @@ const Drawer = createDrawerNavigator();
 const App = () => {
   return (
     <NavigationContainer independent={true}>
-      <Drawer.Navigator initialRouteName="HomeStack">
+      <Drawer.Navigator>
         <Drawer.Screen
           name="홈"
           component={HomeStack}
@@ -90,6 +98,13 @@ const App = () => {
         <Drawer.Screen name="추천 코스" component={Course} />
         <Drawer.Screen name="AI 채팅" component={Chat} />
         <Drawer.Screen name="로그인" component={Login} />
+        <Drawer.Screen
+          name="signup"
+          component={SignUp}
+          options={{
+            headerShown: false,
+          }}
+        />
       </Drawer.Navigator>
     </NavigationContainer>
   );
