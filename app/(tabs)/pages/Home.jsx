@@ -41,4 +41,16 @@ const Home = ({ navigation }) => {
   );
 };
 
+const styles = StyleSheet.create({
+  green: {
+    color: '#2DB400',
+  },
+  startPlogging: {
+    backgroundColor: '#2DB400',
+  },
+  startText: {
+    color: '#fff',
+  },
+});
+
 export default Home;
