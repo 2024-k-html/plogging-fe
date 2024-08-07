@@ -1,41 +1,41 @@
-import React from "react";
-import { StyleSheet, View, Text, SafeAreaView, ScrollView } from "react-native";
-import { StatusBar } from "expo-status-bar";
+import React from 'react';
+import { StyleSheet, View, Text, SafeAreaView, ScrollView } from 'react-native';
+import { StatusBar } from 'expo-status-bar';
 
 const sampleData = [
   {
     ranking: 1,
-    name: "박종혁",
+    name: '박종혁',
     point: 1201,
   },
   {
     ranking: 2,
-    name: "장익범",
+    name: '장익범',
     point: 935,
   },
   {
     ranking: 3,
-    name: "전병환",
+    name: '전병환',
     point: 746,
   },
   {
     ranking: 4,
-    name: "조윤주",
+    name: '조윤주',
     point: 718,
   },
   {
     ranking: 5,
-    name: "김지원",
+    name: '김지원',
     point: 676,
   },
   {
     ranking: 6,
-    name: "황병훈",
+    name: '황병훈',
     point: 549,
   },
   {
     ranking: 892,
-    name: "이서연",
+    name: '이서연',
     point: 30,
   },
 ];
@@ -56,19 +56,19 @@ const Ranking = () => {
               // 1등
               if (index === 1) {
                 bgColorStyle = styles.firstPlace;
-                height = "h-48";
+                height = 'h-48';
                 circleColorStyle = styles.firstPlaceCircle;
               }
               // 2등
               else if (index === 0) {
                 bgColorStyle = styles.secondPlace;
-                height = "h-36";
+                height = 'h-36';
                 circleColorStyle = styles.secondPlaceCircle;
               }
               // 3등
               else if (index == 2) {
                 bgColorStyle = styles.thirdPlace;
-                height = "h-28";
+                height = 'h-28';
                 circleColorStyle = styles.thirdPlaceCircle;
               }
 
@@ -114,25 +114,25 @@ const Ranking = () => {
 
 const styles = StyleSheet.create({
   topRakingContainer: {
-    backgroundColor: "#c9e4fc",
+    backgroundColor: '#c9e4fc',
   },
   firstPlace: {
-    backgroundColor: "#F5CE17", // 1등 컨테이너
+    backgroundColor: '#F5CE17', // 1등 컨테이너
   },
   secondPlace: {
-    backgroundColor: "#B5B9C4", // 2등 컨테이너
+    backgroundColor: '#B5B9C4', // 2등 컨테이너
   },
   thirdPlace: {
-    backgroundColor: "#EE7E34", // 3등 컨테이너
+    backgroundColor: '#EE7E34', // 3등 컨테이너
   },
   firstPlaceCircle: {
-    backgroundColor: "#FFF9C4", // 1등 동그라미
+    backgroundColor: '#FFF9C4', // 1등 동그라미
   },
   secondPlaceCircle: {
-    backgroundColor: "#ECEFF1", // 2등 동그라미
+    backgroundColor: '#ECEFF1', // 2등 동그라미
   },
   thirdPlaceCircle: {
-    backgroundColor: "#FFE0B2", // 3등 동그라미
+    backgroundColor: '#FFE0B2', // 3등 동그라미
   },
 });
 
