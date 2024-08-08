@@ -6,7 +6,7 @@ on:
       - main
 
 env:
-  ORG_NAME: 2024-k-html
+  ORG_NAME: hufs-k-html
   PROJECT_NAME: plogging
   SERVICE_NAME: user-app
 
