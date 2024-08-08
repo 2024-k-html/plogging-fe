@@ -1,53 +1,75 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { StyleSheet, View, Alert, TouchableOpacity, Image } from 'react-native';
+import { View, Alert, TouchableOpacity, Image } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import * as Location from 'expo-location';
 
 const Plogging = () => {
   const [location, setLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
+  const [hasLocationPermission, setHasLocationPermission] = useState(false); // 권한 상태 추가
+
   const mapRef = useRef(null);
 
   useEffect(() => {
     (async () => {
-      Alert.alert(
-        '위치 권한 요청',
-        '앱 사용 중에 위치 정보를 사용하도록 허용하시겠습니까?',
-        [
-          {
-            text: '아니요',
-            onPress: () =>
-              setErrorMsg('Permission to access location was denied'),
-            style: 'cancel',
-          },
-          {
-            text: '네',
-            onPress: async () => {
-              let { status } =
-                await Location.requestForegroundPermissionsAsync();
-              if (status !== 'granted') {
-                setErrorMsg('Permission to access location was denied');
-                return;
-              }
-
-              let location = await Location.getCurrentPositionAsync({});
-              setLocation(location.coords);
-
-              Location.watchPositionAsync(
-                {
-                  accuracy: Location.Accuracy.High,
-                  timeInterval: 1000,
-                  distanceInterval: 1,
-                },
-                (newLocation) => {
-                  setLocation(newLocation.coords);
-                },
-              );
+      // 권한 상태 체크
+      let { status } = await Location.getForegroundPermissionsAsync();
+      if (status !== 'granted') {
+        // 권한이 없는 경우에만 권한 요청
+        Alert.alert(
+          '위치 권한 요청',
+          '앱 사용 중에 위치 정보를 사용하도록 허용하시겠습니까?',
+          [
+            {
+              text: '아니요',
+              onPress: () =>
+                setErrorMsg('Permission to access location was denied'),
+              style: 'cancel',
             },
+            {
+              text: '네',
+              onPress: async () => {
+                let { status } =
+                  await Location.requestForegroundPermissionsAsync();
+                if (status !== 'granted') {
+                  setErrorMsg('Permission to access location was denied');
+                  return;
+                }
+                setHasLocationPermission(true); // 권한 상태 업데이트
+                let location = await Location.getCurrentPositionAsync({});
+                setLocation(location.coords);
+
+                Location.watchPositionAsync(
+                  {
+                    accuracy: Location.Accuracy.High,
+                    timeInterval: 1000,
+                    distanceInterval: 1,
+                  },
+                  (newLocation) => {
+                    setLocation(newLocation.coords);
+                  },
+                );
+              },
+            },
+          ],
+          { cancelable: false },
+        );
+      } else {
+        setHasLocationPermission(true); // 이미 권한이 부여된 경우
+        let location = await Location.getCurrentPositionAsync({});
+        setLocation(location.coords);
+
+        Location.watchPositionAsync(
+          {
+            accuracy: Location.Accuracy.High,
+            timeInterval: 1000,
+            distanceInterval: 1,
           },
-        ],
-        { cancelable: false },
-      );
+          (newLocation) => {
+            setLocation(newLocation.coords);
+          },
+        );
+      }
     })();
   }, []);
 
@@ -64,14 +86,14 @@ const Plogging = () => {
 
   if (!location) {
     return (
-      <View style={styles.container}>
-        <MapView style={styles.map} />
+      <View className="flex-1">
+        <MapView className="w-full h-full" />
       </View>
     );
   }
 
   return (
-    <View style={styles.container}>
+    <View className="flex-1">
       <MapView
         ref={mapRef}
         initialRegion={{
@@ -80,7 +102,7 @@ const Plogging = () => {
           latitudeDelta: 0.01,
           longitudeDelta: 0.01,
         }}
-        style={styles.map}
+        className="w-full h-full"
       >
         <Marker
           coordinate={{
@@ -91,47 +113,17 @@ const Plogging = () => {
           description="여기에 있습니다"
         />
       </MapView>
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity onPress={focusCurrentLocation} style={styles.button}>
+      <View className="bg-blue absolute bottom-5 right-5 rounded p-3">
+        <TouchableOpacity onPress={focusCurrentLocation}>
           <Image
             // eslint-disable-next-line no-undef
             source={require('../../../assets/image/gps.png')}
-            style={styles.buttonImage}
+            className="w-5 h-5"
           />
         </TouchableOpacity>
       </View>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  map: {
-    width: '100%',
-    height: '100%',
-  },
-  buttonContainer: {
-    position: 'absolute',
-    bottom: 20,
-    right: 20,
-    backgroundColor: '#3182F7',
-    borderRadius: 5,
-    padding: 10,
-  },
-  buttonText: {
-    color: '#fff',
-  },
-  button: {
-    backgroundColor: '#3182F7',
-    borderRadius: 5,
-    padding: 5,
-  },
-  buttonImage: {
-    width: 18,
-    height: 18,
-  },
-});
 
 export default Plogging;
