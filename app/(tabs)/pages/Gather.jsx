@@ -136,23 +136,4 @@ const Gather = ({ route, navigation }) => {
   );
 };
 
-const styles = {
-  safeAreaView: {
-    backgroundColor: '#fff',
-  },
-  currentText: {
-    color: '#97A5A4',
-  },
-  area: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: 60,
-    height: 60,
-    borderRadius: 30,
-  },
-  dateText: {
-    color: '#3182F7',
-  },
-};
-
 export default Gather;

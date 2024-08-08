@@ -1,9 +1,10 @@
+/* eslint-disable react/prop-types */
 import React, { useState, useEffect, useRef } from 'react';
 import { View, Alert, TouchableOpacity, Image, Text } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import * as Location from 'expo-location';
 
-const Plogging = () => {
+const Plogging = ({ navigation }) => {
   const [location, setLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
   const [hasLocationPermission, setHasLocationPermission] = useState(false); // 권한 상태 추가
@@ -84,6 +85,28 @@ const Plogging = () => {
     }
   };
 
+  const handleStopPlogging = () => {
+    Alert.alert(
+      '플로깅을 중단하시겠습니까?',
+      '',
+      [
+        {
+          text: '취소',
+          onPress: () => {},
+          style: 'cancel',
+        },
+        {
+          text: '중단',
+          onPress: () => {
+            navigation.replace('home');
+          },
+          style: 'destructive',
+        },
+      ],
+      { cancelable: false },
+    );
+  };
+
   if (!location) {
     return (
       <View className="flex-1">
@@ -127,8 +150,10 @@ const Plogging = () => {
           description="여기에 있습니다"
         />
       </MapView>
-      <View className="bg-red absolute top-5 right-5 px-4 pt-2 pb-3 rounded z-10">
-        <Text className="text-white text-xl font-bold">||</Text>
+      <View className="bg-red absolute bottom-5 left-5 px-4 pt-1 pb-2 rounded z-10">
+        <TouchableOpacity onPress={handleStopPlogging}>
+          <Text className="text-white text-lg font-bold">||</Text>
+        </TouchableOpacity>
       </View>
       <View className="bg-blue absolute bottom-5 right-5 rounded p-3 z-10">
         <TouchableOpacity onPress={focusCurrentLocation}>
