@@ -15,4 +15,4 @@ COPY . .
 RUN expo install
 
 # Expo 개발 서버 시작
-CMD ["expo", "start", "--tunnel"]
+CMD ["npm", "start", "--tunnel"]
