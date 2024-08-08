@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { View, Alert, TouchableOpacity, Image } from 'react-native';
+import { View, Alert, TouchableOpacity, Image, Text } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import * as Location from 'expo-location';
 
@@ -94,6 +94,20 @@ const Plogging = () => {
 
   return (
     <View className="flex-1">
+      <View className="absolute top-0 w-full h-60 bg-black opacity-60 rounded items-center z-20">
+        <Text className="text-white text-xl py-8">총 주운 쓰레기</Text>
+        <Text className="text-white text-3xl font-bold pb-6">3</Text>
+        <View className="flex flex-row">
+          <View className="items-center px-10">
+            <Text className="text-white text-xl">거리</Text>
+            <Text className="text-white text-2xl font-bold">1.3km</Text>
+          </View>
+          <View className="items-center  px-10">
+            <Text className="text-white text-xl">시간</Text>
+            <Text className="text-white text-2xl font-bold">00:34:02</Text>
+          </View>
+        </View>
+      </View>
       <MapView
         ref={mapRef}
         initialRegion={{
@@ -113,7 +127,10 @@ const Plogging = () => {
           description="여기에 있습니다"
         />
       </MapView>
-      <View className="bg-blue absolute bottom-5 right-5 rounded p-3">
+      <View className="bg-red absolute top-5 right-5 px-4 pt-2 pb-3 rounded z-10">
+        <Text className="text-white text-xl font-bold">||</Text>
+      </View>
+      <View className="bg-blue absolute bottom-5 right-5 rounded p-3 z-10">
         <TouchableOpacity onPress={focusCurrentLocation}>
           <Image
             // eslint-disable-next-line no-undef
