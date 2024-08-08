@@ -1,26 +1,18 @@
-# Base image
-FROM node:18-slim
+FROM node:20-alpine
 
-# Install Yarn globally
-RUN if ! command -v yarn >/dev/null 2>&1; then npm install -g yarn; fi
-
-# Install @expo/ngrok globally
-RUN yarn global add @expo/ngrok
-
-# Set working directory
+# 작업 디렉토리 설정
 WORKDIR /app
 
-# Copy package.json and yarn.lock
-COPY package.json yarn.lock ./
+# 의존성 파일 복사 및 설치
+COPY package.json package-lock.json ./
+RUN npm install -g expo-cli
+RUN npm install
 
-# Install dependencies
-RUN yarn install --frozen-lockfile
-
-# Copy the rest of the application code
+# 소스 코드 복사
 COPY . .
 
-# Expose the port Expo will use (default 19000)
-EXPOSE 19000
+# Expo 프로젝트 초기화
+RUN expo install
 
-# Start the Expo server using npx
-CMD ["npx", "expo", "start", "--non-interactive", "--tunnel=false"]
+# Expo 개발 서버 시작
+CMD ["expo", "start", "--tunnel"]
