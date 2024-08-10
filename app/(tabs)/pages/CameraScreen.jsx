@@ -1,14 +1,14 @@
 /* eslint-disable no-undef */
 /* eslint-disable @typescript-eslint/no-var-requires */
-import React, { useState, useRef } from "react";
-import { CameraView, useCameraPermissions } from "expo-camera";
-import { Button, Text, TouchableOpacity, View, Image } from "react-native";
+import React, { useState, useRef } from 'react';
+import { CameraView, useCameraPermissions } from 'expo-camera';
+import { Button, Text, TouchableOpacity, View, Image } from 'react-native';
 
-const camera_change = require("../../../assets/image/camera_change.png");
-const camera_icon = require("../../../assets/image/camera.png");
+const camera_change = require('../../../assets/image/camera_change.png');
+const camera_icon = require('../../../assets/image/camera.png');
 
 const CameraScreen = () => {
-  const [facing, setFacing] = useState("back");
+  const [facing, setFacing] = useState('back');
   const [permission, requestPermission] = useCameraPermissions();
   const cameraRef = useRef(null);
   const [cameraImage, setCameraImage] = useState(null);
