@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect, useRef } from 'react';
 import { View, Alert, TouchableOpacity, Image, Text } from 'react-native';
@@ -8,8 +9,18 @@ const Plogging = ({ navigation }) => {
   const [location, setLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
   const [hasLocationPermission, setHasLocationPermission] = useState(false); // 권한 상태 추가
-
+  const [elapsedTime, setElapsedTime] = useState(0);
+  const timerRef = useRef(null);
   const mapRef = useRef(null);
+
+  useEffect(() => {
+    // 타이머 시작
+    timerRef.current = setInterval(() => {
+      setElapsedTime((prevTime) => prevTime + 1);
+    }, 1000);
+
+    return () => clearInterval(timerRef.current); // 컴포넌트 언마운트 시 타이머 정리
+  }, []);
 
   useEffect(() => {
     (async () => {
@@ -98,13 +109,19 @@ const Plogging = ({ navigation }) => {
         {
           text: '중단',
           onPress: () => {
-            navigation.replace('home');
+            navigation.replace('camera');
           },
           style: 'destructive',
         },
       ],
       { cancelable: false },
     );
+  };
+
+  const formatTime = (seconds) => {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
   };
 
   if (!location) {
@@ -117,18 +134,16 @@ const Plogging = ({ navigation }) => {
 
   return (
     <View className="flex-1">
-      <View className="absolute top-0 w-full h-60 bg-black opacity-60 rounded items-center z-20">
-        <Text className="text-white text-xl py-8">총 주운 쓰레기</Text>
-        <Text className="text-white text-3xl font-bold pb-6">3</Text>
-        <View className="flex flex-row">
-          <View className="items-center px-10">
-            <Text className="text-white text-xl">거리</Text>
-            <Text className="text-white text-2xl font-bold">1.3km</Text>
-          </View>
-          <View className="items-center  px-10">
-            <Text className="text-white text-xl">시간</Text>
-            <Text className="text-white text-2xl font-bold">00:34:02</Text>
-          </View>
+      <View className="flex-row justify-evenly absolute top-0 w-full h-32 bg-black opacity-60 rounded items-center z-20">
+        <View className="items-center px-10">
+          <Text className="text-white text-xl">거리</Text>
+          <Text className="text-white text-2xl font-bold">1.3km</Text>
+        </View>
+        <View className="items-center  px-10">
+          <Text className="text-white text-xl">시간</Text>
+          <Text className="text-white text-2xl font-bold">
+            {formatTime(elapsedTime)}
+          </Text>
         </View>
       </View>
       <MapView
