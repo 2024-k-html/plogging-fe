@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -9,16 +9,16 @@ import {
   TouchableOpacity,
   KeyboardAvoidingView,
   Platform,
-} from "react-native";
-import { Dropdown } from "react-native-element-dropdown";
+} from 'react-native';
+import { Dropdown } from 'react-native-element-dropdown';
 
 const Post = ({ navigation }) => {
-  const [title, setTitle] = useState("");
-  const [maxPeople, setMaxPeople] = useState("");
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
-  const [area, setArea] = useState("");
-  const [context, setContext] = useState("");
+  const [title, setTitle] = useState('');
+  const [maxPeople, setMaxPeople] = useState('');
+  const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate] = useState('');
+  const [area, setArea] = useState('');
+  const [context, setContext] = useState('');
 
   const handlePostSubmit = () => {
     const newPost = {
@@ -31,15 +31,15 @@ const Post = ({ navigation }) => {
       context,
     };
 
-    navigation.navigate("gather", { newPost });
+    navigation.navigate('gather', { newPost });
   };
 
   return (
     <SafeAreaView className="flex-1 bg-white">
       <KeyboardAvoidingView
         className="flex-1"
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
-        keyboardVerticalOffset={Platform.OS === "ios" ? 64 : 0}
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        keyboardVerticalOffset={Platform.OS === 'ios' ? 64 : 0}
       >
         <ScrollView className="px-4 pt-10">
           <View className="mb-6 flex-row justify-between">
@@ -85,9 +85,9 @@ const Post = ({ navigation }) => {
                 style={{ padding: 10 }}
                 placeholder="선택하세요"
                 data={[
-                  { label: "수지구", value: "수지구" },
-                  { label: "기흥구", value: "기흥구" },
-                  { label: "처인구", value: "처인구" },
+                  { label: '수지구', value: '수지구' },
+                  { label: '기흥구', value: '기흥구' },
+                  { label: '처인구', value: '처인구' },
                 ]}
                 labelField="label"
                 valueField="value"
