@@ -41,12 +41,35 @@ const CameraScreen = () => {
     }
   };
 
+  const takePicture = async () => {
+    if (cameraRef.current) {
+      try {
+        const { uri } = await cameraRef.current.takePictureAsync();
+        setCameraImage(uri);
+      } catch (e) {
+        console.log(e);
+      }
+    }
+  };
+
   return (
     <View className="flex-1 justify-center">
       {!cameraImage ? (
+<<<<<<< HEAD
         <CameraView className="flex-1" type={facing} ref={cameraRef}>
           <View className="flex-1 flex-row bg-transparent">
             <TouchableOpacity
+=======
+        <CameraView style={{ flex: 1 }} type={facing} ref={cameraRef}>
+          <View className="flex-1 flex-row bg-transparent">
+            <TouchableOpacity
+              className="absolute bottom-5 left-5 p-2 rounded-full flex-1 bg-white"
+              onPress={toggleCameraFacing}
+            >
+              <Image className="w-10 h-10" source={camera_change} />
+            </TouchableOpacity>
+            <TouchableOpacity
+>>>>>>> 6105e323b (feat: add a taking picture function)
               className="absolute bottom-5 right-5 p-2 rounded-full bg-white"
               onPress={takePicture}
             >
@@ -55,12 +78,16 @@ const CameraScreen = () => {
           </View>
         </CameraView>
       ) : (
+<<<<<<< HEAD
         <View className="flex-1 bg-lightGreen items-center flex justify-center">
           <Image source={{ uri: cameraImage }} className="w-2/3 h-2/3 mb-10" />
           <TouchableOpacity className="bg-green px-6 py-2 rounded-md">
             <Text className="text-white text-2xl">쓰레기 개수 확인하기</Text>
           </TouchableOpacity>
         </View>
+=======
+        <Image source={{ uri: cameraImage }} style={{ flex: 1 }} />
+>>>>>>> 6105e323b (feat: add a taking picture function)
       )}
     </View>
   );
