@@ -55,6 +55,12 @@ const CameraScreen = () => {
           >
             <Image className="w-10 h-10" source={camera_change} />
           </TouchableOpacity>
+          <TouchableOpacity
+            className="absolute bottom-5 right-5 p-2 rounded-full bg-white"
+            onPress={takePicture}
+          >
+            <Image className="w-10 h-10" source={camera_icon} />
+          </TouchableOpacity>
         </View>
       </CameraView>
     </View>
