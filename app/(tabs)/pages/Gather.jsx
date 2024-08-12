@@ -52,9 +52,6 @@ const Gather = ({ navigation }) => {
   return (
     <SafeAreaView className="flex-1 bg-white">
       <StatusBar style="dark" />
-      <View className="border-b border-gray py-4 items-center">
-        <Text className="text-xl">플로깅 함께해요</Text>
-      </View>
       <ScrollView>
         <Image source={ploggingGather} className="resize-contain" />
         <View className="flex-1 px-4">

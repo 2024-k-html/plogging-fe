@@ -1,27 +1,26 @@
-/* eslint-disable no-undef */
-/* eslint-disable react/prop-types */
 import React, { useState, useEffect, useRef } from "react";
 import { View, Alert, TouchableOpacity, Image, Text } from "react-native";
 import MapView, { Marker, Polyline } from "react-native-maps";
 import * as Location from "expo-location";
+import { SafeAreaView } from "react-native";
+import haversine from "haversine";
 
 const Plogging = ({ navigation }) => {
   const [location, setLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
-  const [hasLocationPermission, setHasLocationPermission] = useState(false); // 권한 상태 추가
+  const [hasLocationPermission, setHasLocationPermission] = useState(false);
   const [elapsedTime, setElapsedTime] = useState(0);
-  const [route, setRoute] = useState([]);
-
+  const [path, setPath] = useState([]);
+  const [distanceTravelled, setDistanceTravelled] = useState(0);
   const timerRef = useRef(null);
   const mapRef = useRef(null);
 
   useEffect(() => {
-    // 타이머 시작
     timerRef.current = setInterval(() => {
       setElapsedTime((prevTime) => prevTime + 1);
     }, 1000);
 
-    return () => clearInterval(timerRef.current); // 컴포넌트 언마운트 시 타이머 정리
+    return () => clearInterval(timerRef.current);
   }, []);
 
   useEffect(() => {
@@ -50,7 +49,7 @@ const Plogging = ({ navigation }) => {
                 setHasLocationPermission(true);
                 let location = await Location.getCurrentPositionAsync({});
                 setLocation(location.coords);
-                setRoute((prevRoute) => [
+                setPath((prevRoute) => [
                   ...prevRoute,
                   {
                     latitude: location.coords.latitude,
@@ -66,13 +65,32 @@ const Plogging = ({ navigation }) => {
                   },
                   (newLocation) => {
                     setLocation(newLocation.coords);
-                    setRoute((prevRoute) => [
-                      ...prevRoute,
-                      {
-                        latitude: newLocation.coords.latitude,
-                        longitude: newLocation.coords.longitude,
-                      },
-                    ]);
+                    setPath((prevRoute) => {
+                      const newRoute = [
+                        ...prevRoute,
+                        {
+                          latitude: newLocation.coords.latitude,
+                          longitude: newLocation.coords.longitude,
+                        },
+                      ];
+
+                      if (prevRoute.length > 0) {
+                        const prevLocation = prevRoute[prevRoute.length - 1];
+                        const newLocation = {
+                          latitude: newRoute[newRoute.length - 1].latitude,
+                          longitude: newRoute[newRoute.length - 1].longitude,
+                        };
+
+                        const distance = haversine(prevLocation, newLocation, {
+                          unit: "km",
+                        });
+                        setDistanceTravelled(
+                          (prevDistance) => prevDistance + distance
+                        );
+                      }
+
+                      return newRoute;
+                    });
                   }
                 );
               },
@@ -84,7 +102,7 @@ const Plogging = ({ navigation }) => {
         setHasLocationPermission(true);
         let location = await Location.getCurrentPositionAsync({});
         setLocation(location.coords);
-        setRoute((prevRoute) => [
+        setPath((prevRoute) => [
           ...prevRoute,
           {
             latitude: location.coords.latitude,
@@ -100,13 +118,30 @@ const Plogging = ({ navigation }) => {
           },
           (newLocation) => {
             setLocation(newLocation.coords);
-            setRoute((prevRoute) => [
-              ...prevRoute,
-              {
-                latitude: newLocation.coords.latitude,
-                longitude: newLocation.coords.longitude,
-              },
-            ]);
+            setPath((prevRoute) => {
+              const newRoute = [
+                ...prevRoute,
+                {
+                  latitude: newLocation.coords.latitude,
+                  longitude: newLocation.coords.longitude,
+                },
+              ];
+
+              if (prevRoute.length > 0) {
+                const prevLocation = prevRoute[prevRoute.length - 1];
+                const newLocation = {
+                  latitude: newRoute[newRoute.length - 1].latitude,
+                  longitude: newRoute[newRoute.length - 1].longitude,
+                };
+
+                const distance = haversine(prevLocation, newLocation, {
+                  unit: "km",
+                });
+                setDistanceTravelled((prevDistance) => prevDistance + distance);
+              }
+
+              return newRoute;
+            });
           }
         );
       }
@@ -161,13 +196,15 @@ const Plogging = ({ navigation }) => {
   }
 
   return (
-    <View className="flex-1">
-      <View className="flex-row justify-evenly absolute top-0 w-full h-32 bg-black opacity-60 rounded items-center z-20">
+    <SafeAreaView className="flex-1">
+      <View className="flex-row justify-evenly absolute top-0 w-full h-40 bg-black opacity-60 rounded items-center z-20">
         <View className="items-center px-10">
           <Text className="text-white text-xl">거리</Text>
-          <Text className="text-white text-2xl font-bold">1.3km</Text>
+          <Text className="text-white text-2xl font-bold">
+            {distanceTravelled.toFixed(2)} km
+          </Text>
         </View>
-        <View className="items-center  px-10">
+        <View className="items-center px-10">
           <Text className="text-white text-xl">시간</Text>
           <Text className="text-white text-2xl font-bold">
             {formatTime(elapsedTime)}
@@ -193,7 +230,7 @@ const Plogging = ({ navigation }) => {
           description="여기에 있습니다"
         />
         <Polyline
-          coordinates={route}
+          coordinates={path}
           strokeColor="#3182F7" // 선 색상
           strokeWidth={6} // 선 두께
         />
@@ -207,13 +244,12 @@ const Plogging = ({ navigation }) => {
       <View className="bg-blue absolute bottom-5 right-5 rounded p-3 z-10">
         <TouchableOpacity onPress={focusCurrentLocation}>
           <Image
-            // eslint-disable-next-line no-undef
             source={require("../../../assets/image/gps.png")}
             className="w-5 h-5"
           />
         </TouchableOpacity>
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 
