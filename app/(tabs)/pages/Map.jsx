@@ -2,7 +2,7 @@
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect, useRef } from "react";
 import { View, Alert, TouchableOpacity, Image, Text } from "react-native";
-import MapView, { Marker } from "react-native-maps";
+import MapView, { Marker, Polyline } from "react-native-maps";
 import * as Location from "expo-location";
 
 const Plogging = ({ navigation }) => {
@@ -191,6 +191,11 @@ const Plogging = ({ navigation }) => {
           }}
           title="현재 위치"
           description="여기에 있습니다"
+        />
+        <Polyline
+          coordinates={route}
+          strokeColor="#3182F7" // 선 색상
+          strokeWidth={6} // 선 두께
         />
       </MapView>
 
