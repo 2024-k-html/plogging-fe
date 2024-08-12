@@ -7,6 +7,7 @@ import Map from "./pages/Map";
 import CameraScreen from "./pages/CameraScreen";
 import Post from "./pages/Post";
 import Login from "./pages/Login";
+import Write from "./pages/Write";
 
 const Stack = createStackNavigator();
 
@@ -20,6 +21,7 @@ const App = () => {
       <Stack.Screen name="camera" component={CameraScreen} />
       <Stack.Screen name="post" component={Post} />
       <Stack.Screen name="login" component={Login} />
+      <Stack.Screen name="write" component={Write} />
     </Stack.Navigator>
   );
 };
