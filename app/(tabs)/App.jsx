@@ -32,13 +32,7 @@ const HomeStack = () => {
           headerShown: false,
         }}
       />
-      <Stack.Screen
-        name="home"
-        component={Home}
-        options={{
-          headerShown: false,
-        }}
-      />
+      <Stack.Screen name="home" component={Home} />
       <Stack.Screen name="ranking" component={Ranking} />
       <Stack.Screen name="gather" component={Gather} />
       <Stack.Screen name="map" component={Map} />
