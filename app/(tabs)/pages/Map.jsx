@@ -226,40 +226,21 @@ const Plogging = ({ navigation }) => {
       <MapView
         ref={mapRef}
         initialRegion={{
-          latitude: start[0], // 초기 지도의 중심을 start 좌표로 설정
-          longitude: start[1],
+          latitude: location.latitude,
+          longitude: location.longitude,
           latitudeDelta: 0.01,
           longitudeDelta: 0.01,
         }}
         className="w-full h-full"
       >
-        {/* 전달된 start와 end 좌표에 마커 표시 */}
         <Marker
           coordinate={{
-            latitude: start[0],
-            longitude: start[1],
+            latitude: location.latitude,
+            longitude: location.longitude,
           }}
-          title="Start"
-          description="Start Point"
+          title="현재 위치"
+          description="여기에 있습니다"
         />
-        <Marker
-          coordinate={{
-            latitude: end[0],
-            longitude: end[1],
-          }}
-          title="End"
-          description="End Point"
-        />
-        {location && (
-          <Marker
-            coordinate={{
-              latitude: location.latitude,
-              longitude: location.longitude,
-            }}
-            title="현재 위치"
-            description="Your current location"
-          />
-        )}
         <Polyline
           coordinates={path}
           strokeColor="#3182F7" // 선 색상

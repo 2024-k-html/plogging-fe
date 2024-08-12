@@ -26,14 +26,17 @@ const EachPost = ({ navigation }) => {
           </View>
           <Text className="mt-4">내용</Text>
           <View className="flex justify-center items-center mt-10">
-            <TouchableOpacity className="bg-green w-5/6 rounded-lg">
+            <TouchableOpacity
+              onPress={() => navigation.replace("map")}
+              className="bg-green w-5/6 rounded-lg"
+            >
               <Text className="text-center py-2 text-xl font-bold">
                 플로깅 참여하기
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
               className="bg-green w-5/6 mt-4 rounded-lg"
-              onPress={() => navigation.navigate("gather")}
+              onPress={() => navigation.replace("gather")}
             >
               <Text className="text-center py-2 text-xl font-bold">
                 뒤로 가기
