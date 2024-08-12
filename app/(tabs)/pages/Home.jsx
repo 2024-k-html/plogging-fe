@@ -34,7 +34,7 @@ const Home = ({ navigation }) => {
         </View>
       </View>
       <TouchableOpacity
-        onPress={() => navigation.navigate("plogging")}
+        onPress={() => navigation.navigate("map")}
         className="bg-green shadow-md w-40 h-40 rounded-full mt-36 justify-center items-center"
       >
         <Text className="text-white text-2xl font-bold">플로깅</Text>
