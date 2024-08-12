@@ -48,7 +48,14 @@ const CameraScreen = () => {
   return (
     <View className="flex-1 justify-center">
       <CameraView style={{ flex: 1 }} type={facing} ref={cameraRef}>
-        <View className="flex-1 flex-row bg-transparent"></View>
+        <View className="flex-1 flex-row bg-transparent">
+          <TouchableOpacity
+            className="absolute bottom-5 left-5 p-2 rounded-full flex-1 bg-white"
+            onPress={toggleCameraFacing}
+          >
+            <Image className="w-10 h-10" source={camera_change} />
+          </TouchableOpacity>
+        </View>
       </CameraView>
     </View>
   );
