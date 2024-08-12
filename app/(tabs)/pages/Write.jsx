@@ -61,6 +61,9 @@ const Write = () => {
         <Text className="text-blue mt-2 text-center">
           * 이미지 등록 후에는 이미지 수정이 불가합니다
         </Text>
+        <Text className="text-blue mt-2 text-center">
+          * 플로깅을 하면서 찍은 의미 있는 사진을 첨부해보세요 !
+        </Text>
 
         {/* 기타 정보 섹션 */}
         <View className="mb-6 flex-row justify-between mt-8">
@@ -94,6 +97,9 @@ const Write = () => {
           </View>
           <Text className="mb-2 text-xl">AI 판별 후 나온 result</Text>
         </View>
+        <TouchableOpacity className="bg-blue rounded-md mt-6">
+          <Text className="text-white text-xl text-center py-3">게시하기</Text>
+        </TouchableOpacity>
       </ScrollView>
     </SafeAreaView>
   );
