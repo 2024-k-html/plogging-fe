@@ -2,7 +2,7 @@
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect, useRef } from 'react';
 import { View, Alert, TouchableOpacity, Image, Text } from 'react-native';
-import MapView, { Marker } from 'react-native-maps';
+import MapView, { Marker, Polyline } from 'react-native-maps';
 import * as Location from 'expo-location';
 
 const Plogging = ({ navigation }) => {
@@ -10,6 +10,8 @@ const Plogging = ({ navigation }) => {
   const [errorMsg, setErrorMsg] = useState(null);
   const [hasLocationPermission, setHasLocationPermission] = useState(false); // 권한 상태 추가
   const [elapsedTime, setElapsedTime] = useState(0);
+  const [route, setRoute] = useState([]);
+
   const timerRef = useRef(null);
   const mapRef = useRef(null);
 
@@ -24,10 +26,8 @@ const Plogging = ({ navigation }) => {
 
   useEffect(() => {
     (async () => {
-      // 권한 상태 체크
       let { status } = await Location.getForegroundPermissionsAsync();
       if (status !== 'granted') {
-        // 권한이 없는 경우에만 권한 요청
         Alert.alert(
           '위치 권한 요청',
           '앱 사용 중에 위치 정보를 사용하도록 허용하시겠습니까?',
@@ -47,9 +47,16 @@ const Plogging = ({ navigation }) => {
                   setErrorMsg('Permission to access location was denied');
                   return;
                 }
-                setHasLocationPermission(true); // 권한 상태 업데이트
+                setHasLocationPermission(true);
                 let location = await Location.getCurrentPositionAsync({});
                 setLocation(location.coords);
+                setRoute((prevRoute) => [
+                  ...prevRoute,
+                  {
+                    latitude: location.coords.latitude,
+                    longitude: location.coords.longitude,
+                  },
+                ]);
 
                 Location.watchPositionAsync(
                   {
@@ -59,6 +66,13 @@ const Plogging = ({ navigation }) => {
                   },
                   (newLocation) => {
                     setLocation(newLocation.coords);
+                    setRoute((prevRoute) => [
+                      ...prevRoute,
+                      {
+                        latitude: newLocation.coords.latitude,
+                        longitude: newLocation.coords.longitude,
+                      },
+                    ]);
                   },
                 );
               },
@@ -67,9 +81,16 @@ const Plogging = ({ navigation }) => {
           { cancelable: false },
         );
       } else {
-        setHasLocationPermission(true); // 이미 권한이 부여된 경우
+        setHasLocationPermission(true);
         let location = await Location.getCurrentPositionAsync({});
         setLocation(location.coords);
+        setRoute((prevRoute) => [
+          ...prevRoute,
+          {
+            latitude: location.coords.latitude,
+            longitude: location.coords.longitude,
+          },
+        ]);
 
         Location.watchPositionAsync(
           {
@@ -79,6 +100,13 @@ const Plogging = ({ navigation }) => {
           },
           (newLocation) => {
             setLocation(newLocation.coords);
+            setRoute((prevRoute) => [
+              ...prevRoute,
+              {
+                latitude: newLocation.coords.latitude,
+                longitude: newLocation.coords.longitude,
+              },
+            ]);
           },
         );
       }
@@ -164,7 +192,13 @@ const Plogging = ({ navigation }) => {
           title="현재 위치"
           description="여기에 있습니다"
         />
+        <Polyline
+          coordinates={route}
+          strokeColor="#3182F7" // 선 색상
+          strokeWidth={6} // 선 두께
+        />
       </MapView>
+
       <View className="bg-red absolute bottom-5 left-5 px-4 pt-1 pb-2 rounded z-10">
         <TouchableOpacity onPress={handleStopPlogging}>
           <Text className="text-white text-lg font-bold">||</Text>
