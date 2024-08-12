@@ -16,12 +16,21 @@ const Plogging = ({ navigation }) => {
   const mapRef = useRef(null);
 
   useEffect(() => {
+    startTimer();
+    return () => clearInterval(timerRef.current);
+  }, []);
+
+  const startTimer = () => {
     timerRef.current = setInterval(() => {
       setElapsedTime((prevTime) => prevTime + 1);
     }, 1000);
+  };
 
-    return () => clearInterval(timerRef.current);
-  }, []);
+  const stopTimer = () => {
+    if (timerRef.current) {
+      clearInterval(timerRef.current);
+    }
+  };
 
   useEffect(() => {
     (async () => {
@@ -160,13 +169,16 @@ const Plogging = ({ navigation }) => {
   };
 
   const handleStopPlogging = () => {
+    stopTimer(); // 시간 멈춤
     Alert.alert(
       "플로깅을 중단하시겠습니까?",
       "",
       [
         {
           text: "취소",
-          onPress: () => {},
+          onPress: () => {
+            startTimer(); // 시간 재개
+          },
           style: "cancel",
         },
         {

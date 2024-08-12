@@ -59,7 +59,7 @@ const Course = ({ navigation }) => {
     <SafeAreaView className="flex-1 bg-white">
       <ScrollView className="px-4 py-4">
         {/* 처인구 */}
-        <Text className="bg-yellow py-1 text-xl font-bold w-16 text-center mx-2">
+        <Text className="bg-yellow py-1 text-xl font-bold  w-16 text-center mx-2">
           처인구
         </Text>
         <View className="flex-row flex-wrap justify-between mt-4">

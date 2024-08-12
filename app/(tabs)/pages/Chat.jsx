@@ -31,7 +31,6 @@ const Chat = () => {
     );
   }, []);
 
-  // Custom send button
   const renderSend = (props) => {
     return (
       <TouchableOpacity
@@ -53,14 +52,13 @@ const Chat = () => {
     );
   };
 
-  // Custom bubble to change message background color
   const renderBubble = (props) => {
     return (
       <Bubble
         {...props}
         wrapperStyle={{
           right: {
-            backgroundColor: "#2DB400", // 메시지 배경색을 #2DB400으로 설정
+            backgroundColor: "#2DB400", // 배경색 초록
           },
         }}
       />
@@ -78,8 +76,8 @@ const Chat = () => {
         user={{
           _id: 1,
         }}
-        renderSend={renderSend} // renderSend 함수 추가
-        renderBubble={renderBubble} // renderBubble 함수 추가
+        renderSend={renderSend}
+        renderBubble={renderBubble}
       />
     </View>
   );
