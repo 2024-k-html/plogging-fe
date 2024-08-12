@@ -258,11 +258,13 @@ const CourseMap = ({ navigation, route }) => {
           title="End"
           description="End Point"
         />
-        <Polyline
-          coordinates={path}
-          strokeColor="#3182F7" // 선 색상
-          strokeWidth={6} // 선 두께
-        />
+        {path.length > 1 && (
+          <Polyline
+            coordinates={path}
+            strokeColor="#3182F7" // 선 색상
+            strokeWidth={6} // 선 두께
+          />
+        )}
       </MapView>
 
       <View className="bg-red absolute bottom-5 left-5 px-4 pt-1 pb-2 rounded z-10">

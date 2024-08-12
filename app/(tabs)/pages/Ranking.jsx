@@ -49,7 +49,7 @@ const Ranking = () => {
       <StatusBar style="dark" />
       <ScrollView className="flex-1">
         <View style={styles.topRakingContainer} className="py-12">
-          <View className="flex-row justify-center items-end">
+          <View className="flex-row justify-center items-end shadow-lg">
             {top3.map((item, index) => {
               let height, bgColorStyle, circleColorStyle;
 
@@ -93,7 +93,7 @@ const Ranking = () => {
         </View>
 
         <View className="bg-white py-2 items-center">
-          <View className="flex flex-row justify-around w-11/12 border py-4 mb-3 rounded-xl">
+          <View className="flex flex-row justify-around w-11/12 border py-4 mb-3 rounded-xl shadow-lg">
             <Text className="text-lg">{sampleData[6].ranking}</Text>
             <Text className="text-lg">{sampleData[6].name}</Text>
             <Text className="text-lg">{sampleData[6].point}점</Text>

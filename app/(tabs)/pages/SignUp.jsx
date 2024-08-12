@@ -149,7 +149,7 @@ const SignUp = ({ navigation }) => {
             disabled={!isFormValid}
             onPress={handleSignUpPress}
           >
-            <Text className="text-center text-white py-2 text-xl">
+            <Text className="text-center text-white py-2 text-xl shadow-xl">
               회원 가입하기
             </Text>
           </TouchableOpacity>
