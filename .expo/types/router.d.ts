@@ -6,7 +6,7 @@ export * from 'expo-router';
 declare module 'expo-router' {
   export namespace ExpoRouter {
     export interface __routes<T extends string = string> extends Record<string, unknown> {
-      StaticRoutes: `` | `/` | `/(tabs)` | `/App` | `/_sitemap` | `/explore` | `/pages/CameraScreen` | `/pages/Gather` | `/pages/Home` | `/pages/Login` | `/pages/Map` | `/pages/Post` | `/pages/Ranking` | `/pages/Write`;
+      StaticRoutes: `/` | `/(tabs)` | `/(tabs)/` | `/(tabs)/App` | `/(tabs)/explore` | `/(tabs)/pages/CameraScreen` | `/(tabs)/pages/Course` | `/(tabs)/pages/Gather` | `/(tabs)/pages/Home` | `/(tabs)/pages/Login` | `/(tabs)/pages/Map` | `/(tabs)/pages/Post` | `/(tabs)/pages/Quit` | `/(tabs)/pages/Ranking` | `/(tabs)/pages/Write` | `/App` | `/_sitemap` | `/explore` | `/pages/CameraScreen` | `/pages/Course` | `/pages/Gather` | `/pages/Home` | `/pages/Login` | `/pages/Map` | `/pages/Post` | `/pages/Quit` | `/pages/Ranking` | `/pages/Write`;
       DynamicRoutes: never;
       DynamicRouteTemplate: never;
     }

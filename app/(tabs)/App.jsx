@@ -9,6 +9,7 @@ import Post from "./pages/Post";
 import Login from "./pages/Login";
 import Write from "./pages/Write";
 import Quit from "./pages/Quit";
+import Course from "./pages/Course";
 
 const Stack = createStackNavigator();
 
@@ -24,6 +25,7 @@ const App = () => {
       <Stack.Screen name="login" component={Login} />
       <Stack.Screen name="write" component={Write} />
       <Stack.Screen name="quit" component={Quit} />
+      <Stack.Screen name="course" component={Course} />
     </Stack.Navigator>
   );
 };
