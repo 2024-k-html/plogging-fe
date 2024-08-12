@@ -7,6 +7,8 @@ import {
   ScrollView,
   SafeAreaView,
   Alert,
+  KeyboardAvoidingView,
+  Platform,
 } from "react-native";
 import { Dropdown } from "react-native-element-dropdown";
 
@@ -69,84 +71,90 @@ const SignUp = ({ navigation }) => {
 
   return (
     <SafeAreaView className="bg-white flex-1">
-      <ScrollView className="px-4 py-10">
-        <View className="flex justify-center pb-4">
-          <Text className="mb-2 text-xl">이름</Text>
-          <TextInput
-            className="border w-full p-2 rounded"
-            value={name}
-            onChangeText={(text) => setName(text)}
-          />
-        </View>
-        <View className="mb-6">
-          <Text className="mb-2 text-xl">지역</Text>
-          <View className="border border-gray-400 rounded">
-            <Dropdown
-              style={{ padding: 10 }}
-              placeholder="선택하세요"
-              data={[
-                { label: "수지구", value: "suji" },
-                { label: "기흥구", value: "giheung" },
-                { label: "처인구", value: "cheoin" },
-              ]}
-              labelField="label"
-              valueField="value"
-              value={area}
-              onChange={(item) => setArea(item.value)}
+      <KeyboardAvoidingView
+        style={{ flex: 1 }}
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        keyboardVerticalOffset={Platform.OS === "ios" ? 64 : 0}
+      >
+        <ScrollView className="px-4 py-10">
+          <View className="flex justify-center pb-4">
+            <Text className="mb-2 text-xl">이름</Text>
+            <TextInput
+              className="border w-full p-2 rounded"
+              value={name}
+              onChangeText={(text) => setName(text)}
             />
           </View>
-        </View>
-        <View className="flex justify-center pb-6">
-          <Text className="mb-2 text-xl">아이디</Text>
-          <TextInput
-            className="border w-full p-2 rounded"
-            value={userId}
-            onChangeText={(text) => setUserId(text)}
-          />
-        </View>
-        <View className="flex justify-center pb-6">
-          <Text className="mb-2 text-xl">비밀번호</Text>
-          <TextInput
-            className={`border w-full p-2 rounded ${
-              !isPasswordValid ? "border-coral" : ""
+          <View className="mb-6">
+            <Text className="mb-2 text-xl">지역</Text>
+            <View className="border border-gray-400 rounded">
+              <Dropdown
+                style={{ padding: 10 }}
+                placeholder="선택하세요"
+                data={[
+                  { label: "수지구", value: "suji" },
+                  { label: "기흥구", value: "giheung" },
+                  { label: "처인구", value: "cheoin" },
+                ]}
+                labelField="label"
+                valueField="value"
+                value={area}
+                onChange={(item) => setArea(item.value)}
+              />
+            </View>
+          </View>
+          <View className="flex justify-center pb-6">
+            <Text className="mb-2 text-xl">아이디</Text>
+            <TextInput
+              className="border w-full p-2 rounded"
+              value={userId}
+              onChangeText={(text) => setUserId(text)}
+            />
+          </View>
+          <View className="flex justify-center pb-6">
+            <Text className="mb-2 text-xl">비밀번호</Text>
+            <TextInput
+              className={`border w-full p-2 rounded ${
+                !isPasswordValid ? "border-coral" : ""
+              }`}
+              secureTextEntry
+              value={password}
+              onChangeText={handlePasswordChange}
+            />
+            {!isPasswordValid && (
+              <Text className="text-coral">
+                비밀번호는 8자 이상이어야 하며, 숫자, 영문, 특수문자를 포함해야
+                합니다.
+              </Text>
+            )}
+          </View>
+          <View className="flex justify-center pb-6">
+            <Text className="mb-2 text-xl">비밀번호 확인</Text>
+            <TextInput
+              className={`border w-full p-2 rounded ${
+                !isPasswordMatch ? "border-coral" : ""
+              }`}
+              secureTextEntry
+              value={confirmPassword}
+              onChangeText={handleConfirmPasswordChange}
+            />
+            {!isPasswordMatch && (
+              <Text className="text-coral">비밀번호가 일치하지 않습니다.</Text>
+            )}
+          </View>
+          <TouchableOpacity
+            className={`bg-green rounded-md mt-10 ${
+              !isFormValid ? "opacity-50" : ""
             }`}
-            secureTextEntry
-            value={password}
-            onChangeText={handlePasswordChange}
-          />
-          {!isPasswordValid && (
-            <Text className="text-coral">
-              비밀번호는 8자 이상이어야 하며, 숫자, 영문, 특수문자를 포함해야
-              합니다.
+            disabled={!isFormValid}
+            onPress={handleSignUpPress}
+          >
+            <Text className="text-center text-white py-2 text-xl">
+              회원 가입하기
             </Text>
-          )}
-        </View>
-        <View className="flex justify-center pb-6">
-          <Text className="mb-2 text-xl">비밀번호 확인</Text>
-          <TextInput
-            className={`border w-full p-2 rounded ${
-              !isPasswordMatch ? "border-coral" : ""
-            }`}
-            secureTextEntry
-            value={confirmPassword}
-            onChangeText={handleConfirmPasswordChange}
-          />
-          {!isPasswordMatch && (
-            <Text className="text-coral">비밀번호가 일치하지 않습니다.</Text>
-          )}
-        </View>
-        <TouchableOpacity
-          className={`bg-green rounded-md mt-10 ${
-            !isFormValid ? "opacity-50" : ""
-          }`}
-          disabled={!isFormValid}
-          onPress={handleSignUpPress}
-        >
-          <Text className="text-center text-white py-2 text-xl">
-            회원 가입하기
-          </Text>
-        </TouchableOpacity>
-      </ScrollView>
+          </TouchableOpacity>
+        </ScrollView>
+      </KeyboardAvoidingView>
     </SafeAreaView>
   );
 };
