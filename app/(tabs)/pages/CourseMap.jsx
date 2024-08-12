@@ -5,15 +5,20 @@ import * as Location from "expo-location";
 import { SafeAreaView } from "react-native";
 import haversine from "haversine";
 
-const Plogging = ({ navigation }) => {
+const Plogging = ({ navigation, route }) => {
   const [location, setLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
   const [hasLocationPermission, setHasLocationPermission] = useState(false);
   const [elapsedTime, setElapsedTime] = useState(0);
   const [path, setPath] = useState([]);
   const [distanceTravelled, setDistanceTravelled] = useState(0);
+  const { locationPoint } = route.params;
   const timerRef = useRef(null);
   const mapRef = useRef(null);
+
+  useEffect(() => {
+    console.log(locationPoint);
+  });
 
   useEffect(() => {
     timerRef.current = setInterval(() => {
@@ -198,13 +203,13 @@ const Plogging = ({ navigation }) => {
   return (
     <SafeAreaView className="flex-1">
       <View className="flex-row justify-evenly absolute top-0 w-full h-40 bg-black opacity-60 rounded items-center z-20">
-        <View className="items-center px-10">
+        <View className="items-center px-10 pt-10">
           <Text className="text-white text-xl">거리</Text>
           <Text className="text-white text-2xl font-bold">
             {distanceTravelled.toFixed(2)} km
           </Text>
         </View>
-        <View className="items-center px-10">
+        <View className="items-center px-10 pt-10">
           <Text className="text-white text-xl">시간</Text>
           <Text className="text-white text-2xl font-bold">
             {formatTime(elapsedTime)}

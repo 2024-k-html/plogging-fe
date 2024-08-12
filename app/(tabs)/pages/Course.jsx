@@ -2,9 +2,10 @@ import React from "react";
 import { SafeAreaView, ScrollView, Text, View } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 
-const Course = () => {
+const Course = ({ navigation }) => {
   const renderCourse = (courseName, coordinates) => (
     <View className="w-1/2 p-1" key={courseName}>
+      <Text className="text-center mt-1 mb-2 font-bold">{courseName}</Text>
       <MapView
         className="w-full h-40"
         initialRegion={{
@@ -13,6 +14,7 @@ const Course = () => {
           latitudeDelta: 0.01,
           longitudeDelta: 0.01,
         }}
+        onPress={() => navigation.navigate("courseMap", { coordinates })}
       >
         <Marker
           coordinate={{
@@ -27,7 +29,6 @@ const Course = () => {
           }}
         />
       </MapView>
-      <Text className="text-center mt-1">{courseName}</Text>
     </View>
   );
 
@@ -54,6 +55,10 @@ const Course = () => {
             [37.2817, 127.1146],
             [37.2841, 127.1178],
           ])}
+          {renderCourse("남사 시민야구장 - 이진봉", [
+            [37.277, 127.2586],
+            [37.2804, 127.2614],
+          ])}
         </View>
 
         {/* 수지구 */}
@@ -73,6 +78,10 @@ const Course = () => {
             [37.2876, 127.1085],
             [37.2958, 127.1165],
           ])}
+          {renderCourse("신리초등학교 - 신정공원", [
+            [37.3192, 127.2614],
+            [37.3188, 127.0957],
+          ])}
         </View>
 
         {/* 기흥구 */}
@@ -80,9 +89,9 @@ const Course = () => {
           기흥구
         </Text>
         <View className="flex-row flex-wrap justify-between mt-4">
-          {renderCourse("기흥역 - 강남대역", [
-            [37.2782, 127.1265],
+          {renderCourse("강남대역 - 기흥역", [
             [37.2827, 127.1298],
+            [37.2782, 127.1265],
           ])}
           {renderCourse("기흥역 - 신갈역", [
             [37.2782, 127.1265],
@@ -91,6 +100,10 @@ const Course = () => {
           {renderCourse("구성역 - 보정역", [
             [37.2728, 127.1228],
             [37.2803, 127.133],
+          ])}
+          {renderCourse("마북 근린 공원 - 구성역", [
+            [37.2763, 127.0923],
+            [37.2746, 127.0869],
           ])}
         </View>
       </ScrollView>

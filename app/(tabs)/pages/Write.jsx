@@ -58,10 +58,10 @@ const Write = () => {
             <Text className="text-gray-400">클릭하여 사진 업로드(필수)</Text>
           )}
         </TouchableOpacity>
-        <Text className="text-blue mt-2 text-center">
+        <Text className="text-coral mt-2 text-center">
           * 이미지 등록 후에는 이미지 수정이 불가합니다
         </Text>
-        <Text className="text-blue mt-2 text-center">
+        <Text className="text-coral mt-2 text-center">
           * 플로깅을 하면서 찍은 의미 있는 사진을 첨부해보세요 !
         </Text>
 
