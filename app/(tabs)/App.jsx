@@ -34,6 +34,7 @@ const HomeStack = () => {
       <Stack.Screen name="course" component={Course} />
       <Stack.Screen name="courseMap" component={CourseMap} />
       <Stack.Screen name="singup" component={SignUp} />
+      <Stack.Screen name="login" component={Login} />
     </Stack.Navigator>
   );
 };

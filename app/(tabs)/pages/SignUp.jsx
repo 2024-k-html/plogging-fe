@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import { Dropdown } from "react-native-element-dropdown";
 
-const SignUp = () => {
+const SignUp = ({ navigation }) => {
   const [name, setName] = useState("");
   const [area, setArea] = useState("");
   const [userId, setUserId] = useState("");
@@ -55,6 +55,7 @@ const SignUp = () => {
 
     // 회원가입 처리 로직
     Alert.alert("회원가입 성공", "회원가입이 완료되었습니다.");
+    navigation.replace("login");
   };
 
   const isFormValid =
@@ -135,7 +136,7 @@ const SignUp = () => {
           )}
         </View>
         <TouchableOpacity
-          className={`bg-blue rounded-md mt-10 ${
+          className={`bg-green rounded-md mt-10 ${
             !isFormValid ? "opacity-50" : ""
           }`}
           disabled={!isFormValid}
