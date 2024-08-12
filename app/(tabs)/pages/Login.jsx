@@ -69,8 +69,8 @@ const Login = () => {
             className="bg-green rounded-md mt-10"
             onPress={handleSignUpPress}
           >
-            <Text className="text-center text-white py-4 text-xl">
-              회원 가입하기
+            <Text className="text-center text-white py-4 text-xl shadow-lg">
+              로그인
             </Text>
           </TouchableOpacity>
         </ScrollView>

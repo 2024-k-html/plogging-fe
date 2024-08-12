@@ -13,25 +13,32 @@ const CourseMap = ({ navigation, route }) => {
   const [path, setPath] = useState([]);
   const [distanceTravelled, setDistanceTravelled] = useState(0);
 
-  // **route.params에서 start와 end 좌표 추출**
   const { start, end } = route.params;
 
   const timerRef = useRef(null);
   const mapRef = useRef(null);
 
   useEffect(() => {
-    // **전달된 좌표 콘솔 출력**
     console.log("Start:", start);
     console.log("End:", end);
   }, [start, end]);
 
   useEffect(() => {
+    startTimer();
+    return () => clearInterval(timerRef.current);
+  }, []);
+
+  const startTimer = () => {
     timerRef.current = setInterval(() => {
       setElapsedTime((prevTime) => prevTime + 1);
     }, 1000);
+  };
 
-    return () => clearInterval(timerRef.current);
-  }, []);
+  const stopTimer = () => {
+    if (timerRef.current) {
+      clearInterval(timerRef.current);
+    }
+  };
 
   useEffect(() => {
     (async () => {
@@ -170,13 +177,16 @@ const CourseMap = ({ navigation, route }) => {
   };
 
   const handleStopPlogging = () => {
+    stopTimer(); // 시간 멈춤
     Alert.alert(
       "플로깅을 중단하시겠습니까?",
       "",
       [
         {
           text: "취소",
-          onPress: () => {},
+          onPress: () => {
+            startTimer(); // 시간 재개
+          },
           style: "cancel",
         },
         {
@@ -224,7 +234,7 @@ const CourseMap = ({ navigation, route }) => {
       <MapView
         ref={mapRef}
         initialRegion={{
-          latitude: start[0], // **초기 지도의 중심을 start 좌표로 설정**
+          latitude: start[0], // 초기 지도의 중심을 start 좌표로 설정
           longitude: start[1],
           latitudeDelta: 0.01,
           longitudeDelta: 0.01,

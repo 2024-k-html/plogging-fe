@@ -11,6 +11,7 @@ import {
   Platform,
 } from "react-native";
 import { Dropdown } from "react-native-element-dropdown";
+import axios from "axios";
 
 const SignUp = ({ navigation }) => {
   const [name, setName] = useState("");
@@ -33,7 +34,7 @@ const SignUp = ({ navigation }) => {
     setIsPasswordMatch(text === password);
   };
 
-  const handleSignUpPress = () => {
+  const handleSignUpPress = async () => {
     if (!isPasswordValid) {
       Alert.alert(
         "비밀번호 오류",
@@ -55,9 +56,27 @@ const SignUp = ({ navigation }) => {
       return;
     }
 
-    // 회원가입 처리 로직
-    Alert.alert("회원가입 성공", "회원가입이 완료되었습니다.");
-    navigation.replace("login");
+    // 회원가입 API 요청
+    try {
+      const response = await axios.post("http://localhost:8080/users/sign-up", {
+        username: userId,
+        password: password,
+        name: name,
+      });
+
+      if (response.status === 200) {
+        Alert.alert("회원가입 성공", "회원가입이 완료되었습니다.");
+        navigation.navigate("login");
+      } else {
+        Alert.alert("회원가입 실패", "다시 시도해주세요.");
+      }
+    } catch (error) {
+      console.error(error);
+      Alert.alert(
+        "오류",
+        error.response?.data?.message || "네트워크 오류가 발생했습니다."
+      );
+    }
   };
 
   const isFormValid =
@@ -77,6 +96,7 @@ const SignUp = ({ navigation }) => {
         keyboardVerticalOffset={Platform.OS === "ios" ? 64 : 0}
       >
         <ScrollView className="px-4 py-10">
+          <Text className="text-3xl text-center mb-4">회원가입</Text>
           <View className="flex justify-center pb-4">
             <Text className="mb-2 text-xl">이름</Text>
             <TextInput
@@ -149,7 +169,7 @@ const SignUp = ({ navigation }) => {
             disabled={!isFormValid}
             onPress={handleSignUpPress}
           >
-            <Text className="text-center text-white py-2 text-xl">
+            <Text className="text-center text-white py-2 text-xl shadow-xl">
               회원 가입하기
             </Text>
           </TouchableOpacity>
