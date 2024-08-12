@@ -23,6 +23,7 @@ const Post = () => {
           <Text className="mb-2 text-xl">제목</Text>
           <TextInput className="border w-64 p-2 rounded" />
         </View>
+
         <View className="mb-6 flex-row justify-between">
           <Text className="mb-2 text-xl">모집 인원</Text>
           <TextInput
@@ -30,6 +31,7 @@ const Post = () => {
             keyboardType="numeric"
           />
         </View>
+
         <View className="mb-6 flex-row items-center">
           <Text className="mb-2 flex-1 text-xl">일정</Text>
           <TextInput
@@ -42,7 +44,39 @@ const Post = () => {
             placeholder="yyyy-MM-dd"
           />
         </View>
-        \
+
+        <View className="mb-6">
+          <Text className="mb-2 text-xl">지역</Text>
+          <View className="border border-gray-400 rounded">
+            <Dropdown
+              style={{ padding: 10 }}
+              placeholder="선택하세요"
+              data={[
+                { label: "수지구", value: "suji" },
+                { label: "기흥구", value: "giheung" },
+                { label: "처인구", value: "cheoin" },
+              ]}
+              labelField="label"
+              valueField="value"
+              value={area}
+              onChange={(item) => setArea(item.value)}
+            />
+          </View>
+        </View>
+
+        <View className="mb-4">
+          <Text className="mb-2 text-xl">내용</Text>
+          <TextInput
+            className="border p-2 rounded h-32"
+            multiline
+            textAlignVertical="top"
+          />
+        </View>
+        <TouchableOpacity className="bg-blue rounded-md mt-10">
+          <Text className="text-center text-white py-2 text-xl">
+            모집 글 올리기
+          </Text>
+        </TouchableOpacity>
       </ScrollView>
     </SafeAreaView>
   );
