@@ -14,7 +14,13 @@ const Course = ({ navigation }) => {
           latitudeDelta: 0.01,
           longitudeDelta: 0.01,
         }}
-        onPress={() => navigation.navigate("courseMap", { coordinates })}
+        // **onPress 이벤트 추가**
+        onPress={() =>
+          navigation.navigate("courseMap", {
+            start: coordinates[0],
+            end: coordinates[1],
+          })
+        }
       >
         <Marker
           coordinate={{

@@ -5,20 +5,25 @@ import * as Location from "expo-location";
 import { SafeAreaView } from "react-native";
 import haversine from "haversine";
 
-const Plogging = ({ navigation, route }) => {
+const CourseMap = ({ navigation, route }) => {
   const [location, setLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
   const [hasLocationPermission, setHasLocationPermission] = useState(false);
   const [elapsedTime, setElapsedTime] = useState(0);
   const [path, setPath] = useState([]);
   const [distanceTravelled, setDistanceTravelled] = useState(0);
-  const { locationPoint } = route.params;
+
+  // **route.params에서 start와 end 좌표 추출**
+  const { start, end } = route.params;
+
   const timerRef = useRef(null);
   const mapRef = useRef(null);
 
   useEffect(() => {
-    console.log(locationPoint);
-  });
+    // **전달된 좌표 콘솔 출력**
+    console.log("Start:", start);
+    console.log("End:", end);
+  }, [start, end]);
 
   useEffect(() => {
     timerRef.current = setInterval(() => {
@@ -202,14 +207,14 @@ const Plogging = ({ navigation, route }) => {
 
   return (
     <SafeAreaView className="flex-1">
-      <View className="flex-row justify-evenly absolute top-0 w-full h-40 bg-black opacity-60 rounded items-center z-20">
-        <View className="items-center px-10 pt-10">
+      <View className="flex-row justify-evenly absolute top-0 w-full h-32 bg-black opacity-60 rounded items-center z-20">
+        <View className="items-center px-10">
           <Text className="text-white text-xl">거리</Text>
           <Text className="text-white text-2xl font-bold">
             {distanceTravelled.toFixed(2)} km
           </Text>
         </View>
-        <View className="items-center px-10 pt-10">
+        <View className="items-center px-10">
           <Text className="text-white text-xl">시간</Text>
           <Text className="text-white text-2xl font-bold">
             {formatTime(elapsedTime)}
@@ -219,20 +224,29 @@ const Plogging = ({ navigation, route }) => {
       <MapView
         ref={mapRef}
         initialRegion={{
-          latitude: location.latitude,
-          longitude: location.longitude,
+          latitude: start[0], // **초기 지도의 중심을 start 좌표로 설정**
+          longitude: start[1],
           latitudeDelta: 0.01,
           longitudeDelta: 0.01,
         }}
         className="w-full h-full"
       >
+        {/* 전달된 start와 end 좌표에 마커 표시 */}
         <Marker
           coordinate={{
-            latitude: location.latitude,
-            longitude: location.longitude,
+            latitude: start[0],
+            longitude: start[1],
           }}
-          title="현재 위치"
-          description="여기에 있습니다"
+          title="Start"
+          description="Start Point"
+        />
+        <Marker
+          coordinate={{
+            latitude: end[0],
+            longitude: end[1],
+          }}
+          title="End"
+          description="End Point"
         />
         <Polyline
           coordinates={path}
@@ -258,4 +272,4 @@ const Plogging = ({ navigation, route }) => {
   );
 };
 
-export default Plogging;
+export default CourseMap;
