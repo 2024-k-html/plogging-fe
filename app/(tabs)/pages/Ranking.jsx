@@ -45,7 +45,7 @@ const Ranking = () => {
   const others = sampleData.slice(3);
 
   return (
-    <SafeAreaView style={styles.safeAreaView} className="flex-1 bg-white">
+    <SafeAreaView className="flex-1 bg-white">
       <StatusBar style="dark" />
       <ScrollView className="flex-1">
         <View style={styles.topRakingContainer} className="py-12">
@@ -113,9 +113,6 @@ const Ranking = () => {
 };
 
 const styles = StyleSheet.create({
-  safeAreaView: {
-    backgroundColor: "#fff",
-  },
   topRakingContainer: {
     backgroundColor: "#c9e4fc",
   },
