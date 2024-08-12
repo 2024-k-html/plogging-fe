@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { View, Dimensions, Image, TouchableOpacity } from "react-native";
-import { GiftedChat } from "react-native-gifted-chat";
+import { GiftedChat, Bubble } from "react-native-gifted-chat";
 
 const send_button = require("../../../assets/image/send.png");
 const aiProfile = require("../../../assets/image/ploggingIcon2.png");
@@ -53,6 +53,20 @@ const Chat = () => {
     );
   };
 
+  // Custom bubble to change message background color
+  const renderBubble = (props) => {
+    return (
+      <Bubble
+        {...props}
+        wrapperStyle={{
+          right: {
+            backgroundColor: "#2DB400", // 메시지 배경색을 #2DB400으로 설정
+          },
+        }}
+      />
+    );
+  };
+
   return (
     <View className="flex-1">
       <GiftedChat
@@ -65,6 +79,7 @@ const Chat = () => {
           _id: 1,
         }}
         renderSend={renderSend} // renderSend 함수 추가
+        renderBubble={renderBubble} // renderBubble 함수 추가
       />
     </View>
   );
