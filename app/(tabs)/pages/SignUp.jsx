@@ -57,7 +57,7 @@ const SignUp = ({ navigation }) => {
 
     // 회원가입 처리 로직
     Alert.alert("회원가입 성공", "회원가입이 완료되었습니다.");
-    navigation.replace("login");
+    navigation.navigate("login");
   };
 
   const isFormValid =
