@@ -14,6 +14,7 @@ import Course from "./pages/Course";
 import CourseMap from "./pages/CourseMap";
 import SignUp from "./pages/SignUp";
 import Chat from "./pages/Chat";
+import EachPost from "./pages/EachPost";
 
 import { createStackNavigator } from "@react-navigation/stack";
 
@@ -37,6 +38,7 @@ const HomeStack = () => {
       <Stack.Screen name="singup" component={SignUp} />
       <Stack.Screen name="login" component={Login} />
       <Stack.Screen name="chat" component={Chat} />
+      <Stack.Screen name="eachPost" component={EachPost} />
     </Stack.Navigator>
   );
 };

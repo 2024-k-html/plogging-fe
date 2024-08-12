@@ -72,9 +72,10 @@ const Gather = ({ navigation }) => {
             </TouchableOpacity>
           </View>
           {sampleData.map((item, index) => (
-            <View
+            <TouchableOpacity
               key={index}
               className="flex-row border rounded-xl mb-4 p-3 bg-white shadow-md"
+              onPress={() => navigation.navigate("eachPost")}
             >
               <View
                 style={{ backgroundColor: getBackgroundColor(item.area) }}
@@ -89,7 +90,7 @@ const Gather = ({ navigation }) => {
                 </Text>
                 <Text className="mt-2 text-blue">일정: {item.date}</Text>
               </View>
-            </View>
+            </TouchableOpacity>
           ))}
         </View>
       </ScrollView>
