@@ -70,7 +70,7 @@ const Login = () => {
             onPress={handleSignUpPress}
           >
             <Text className="text-center text-white py-4 text-xl shadow-lg">
-              회원 가입하기
+              로그인
             </Text>
           </TouchableOpacity>
         </ScrollView>

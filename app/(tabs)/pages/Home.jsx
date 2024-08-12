@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React from "react";
+import React, { useEffect } from "react";
 import {
   View,
   SafeAreaView,
@@ -13,6 +13,12 @@ import { StatusBar } from "expo-status-bar";
 const plogging_image = require("../../../assets/image/homePlogging.png");
 
 const Home = ({ navigation }) => {
+  // useEffect(()=>{
+  //   try{
+  //     const response = await axios.get("http://localhost:8080/users/me");
+  //   }
+  // })
+
   return (
     <SafeAreaView className="flex-1 bg-white items-center">
       <StatusBar style="dark" />
@@ -31,8 +37,8 @@ const Home = ({ navigation }) => {
         </View>
       </View>
       <TouchableOpacity
-        onPress={() => navigation.navigate("map")}
-        className="bg-green shadow-md w-40 h-40 rounded-full mt-36 justify-center items-center"
+        onPress={() => navigation.replace("map")}
+        className="bg-green shadow-md w-40 h-40 rounded-full mt-32 justify-center items-center"
       >
         <Text className="text-white text-2xl font-bold">플로깅</Text>
         <Text className="text-2xl text-white font-bold">시작하기</Text>

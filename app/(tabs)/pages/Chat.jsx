@@ -108,7 +108,7 @@ const Chat = () => {
   };
 
   return (
-    <View className="flex-1">
+    <View className="flex-1 bg-white">
       <GiftedChat
         placeholder={"메세지를 입력하세요..."}
         alwaysShowSend={true}

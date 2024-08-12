@@ -29,7 +29,7 @@ const Post = () => {
           </View>
 
           <View className="mb-6 flex-row justify-between">
-            <Text className="mb-2 text-xl">모집 인원</Text>
+            <Text className="mb-2 text-xl">모집 정원</Text>
             <TextInput
               className="border w-64 p-2 rounded"
               keyboardType="numeric"

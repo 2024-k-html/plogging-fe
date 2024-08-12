@@ -68,7 +68,9 @@ const Gather = ({ navigation }) => {
               onPress={() => navigation.navigate("post")}
               className="bg-blue px-2 py-1 h-7 rounded-sm"
             >
-              <Text className="text-center font-bold">+ 모집 글 쓰기</Text>
+              <Text className="text-center mt-0.5 font-bold">
+                + 모집 글 쓰기
+              </Text>
             </TouchableOpacity>
           </View>
           {sampleData.map((item, index) => (
