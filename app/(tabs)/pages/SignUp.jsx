@@ -6,22 +6,75 @@ import {
   TouchableOpacity,
   ScrollView,
   SafeAreaView,
-  Image,
+  Alert,
 } from "react-native";
 import { Dropdown } from "react-native-element-dropdown";
 
-const plogging_image = require("../../../assets/image/ploggingSignup.jpg");
-
 const SignUp = () => {
+  const [name, setName] = useState("");
   const [area, setArea] = useState("");
+  const [userId, setUserId] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [isPasswordValid, setIsPasswordValid] = useState(true);
+  const [isPasswordMatch, setIsPasswordMatch] = useState(true);
+
+  const passwordRegex = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/;
+
+  const handlePasswordChange = (text) => {
+    setPassword(text);
+    setIsPasswordValid(passwordRegex.test(text));
+  };
+
+  const handleConfirmPasswordChange = (text) => {
+    setConfirmPassword(text);
+    setIsPasswordMatch(text === password);
+  };
+
+  const handleSignUpPress = () => {
+    if (!isPasswordValid) {
+      Alert.alert(
+        "비밀번호 오류",
+        "비밀번호는 8자 이상이어야 하며, 숫자, 영문, 특수문자를 포함해야 합니다."
+      );
+      return;
+    }
+
+    if (!isPasswordMatch) {
+      Alert.alert(
+        "비밀번호 오류",
+        "비밀번호와 비밀번호 확인이 일치하지 않습니다."
+      );
+      return;
+    }
+
+    if (!name || !area || !userId || !password || !confirmPassword) {
+      Alert.alert("입력 오류", "모든 필드를 입력해주세요.");
+      return;
+    }
+
+    // 회원가입 처리 로직
+    Alert.alert("회원가입 성공", "회원가입이 완료되었습니다.");
+  };
+
+  const isFormValid =
+    name &&
+    area &&
+    userId &&
+    password &&
+    confirmPassword &&
+    isPasswordValid &&
+    isPasswordMatch;
+
   return (
-    <SafeAreaView className=" bg-white flex-1">
+    <SafeAreaView className="bg-white flex-1">
       <ScrollView className="px-4 py-10">
         <View className="flex justify-center pb-4">
           <Text className="mb-2 text-xl">이름</Text>
           <TextInput
             className="border w-full p-2 rounded"
-            keyboardType="numeric"
+            value={name}
+            onChangeText={(text) => setName(text)}
           />
         </View>
         <View className="mb-6">
@@ -46,26 +99,50 @@ const SignUp = () => {
           <Text className="mb-2 text-xl">아이디</Text>
           <TextInput
             className="border w-full p-2 rounded"
-            keyboardType="numeric"
+            value={userId}
+            onChangeText={(text) => setUserId(text)}
           />
         </View>
         <View className="flex justify-center pb-6">
           <Text className="mb-2 text-xl">비밀번호</Text>
           <TextInput
-            className="border w-full p-2 rounded"
-            keyboardType="numeric"
+            className={`border w-full p-2 rounded ${
+              !isPasswordValid ? "border-coral" : ""
+            }`}
+            secureTextEntry
+            value={password}
+            onChangeText={handlePasswordChange}
           />
+          {!isPasswordValid && (
+            <Text className="text-coral">
+              비밀번호는 8자 이상이어야 하며, 숫자, 영문, 특수문자를 포함해야
+              합니다.
+            </Text>
+          )}
         </View>
         <View className="flex justify-center pb-6">
           <Text className="mb-2 text-xl">비밀번호 확인</Text>
           <TextInput
-            className="border w-full p-2 rounded"
-            keyboardType="numeric"
+            className={`border w-full p-2 rounded ${
+              !isPasswordMatch ? "border-coral" : ""
+            }`}
+            secureTextEntry
+            value={confirmPassword}
+            onChangeText={handleConfirmPasswordChange}
           />
+          {!isPasswordMatch && (
+            <Text className="text-coral">비밀번호가 일치하지 않습니다.</Text>
+          )}
         </View>
-        <TouchableOpacity className="bg-blue rounded-md mt-10">
+        <TouchableOpacity
+          className={`bg-blue rounded-md mt-10 ${
+            !isFormValid ? "opacity-50" : ""
+          }`}
+          disabled={!isFormValid}
+          onPress={handleSignUpPress}
+        >
           <Text className="text-center text-white py-2 text-xl">
-            모집 글 올리기
+            회원 가입하기
           </Text>
         </TouchableOpacity>
       </ScrollView>
