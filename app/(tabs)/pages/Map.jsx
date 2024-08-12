@@ -209,7 +209,7 @@ const Plogging = ({ navigation }) => {
 
   return (
     <SafeAreaView className="flex-1">
-      <View className="flex-row justify-evenly absolute top-0 w-full h-40 bg-black opacity-60 rounded items-center z-20">
+      <View className="flex-row justify-evenly absolute top-12 w-full h-40 bg-black opacity-60 rounded items-center z-20">
         <View className="items-center px-10">
           <Text className="text-white text-xl">거리</Text>
           <Text className="text-white text-2xl font-bold">

@@ -35,7 +35,13 @@ const HomeStack = () => {
       <Stack.Screen name="home" component={Home} />
       <Stack.Screen name="ranking" component={Ranking} />
       <Stack.Screen name="gather" component={Gather} />
-      <Stack.Screen name="map" component={Map} />
+      <Stack.Screen
+        name="map"
+        options={{
+          headerShown: false,
+        }}
+        component={Map}
+      />
       <Stack.Screen name="camera" component={CameraScreen} />
       <Stack.Screen name="post" component={Post} />
       <Stack.Screen name="write" component={Write} />
@@ -44,7 +50,13 @@ const HomeStack = () => {
       <Stack.Screen name="courseMap" component={CourseMap} />
       <Stack.Screen name="login" component={Login} />
       <Stack.Screen name="chat" component={Chat} />
-      <Stack.Screen name="eachPost" component={EachPost} />
+      <Stack.Screen
+        name="eachPost"
+        options={{
+          headerShown: false,
+        }}
+        component={EachPost}
+      />
     </Stack.Navigator>
   );
 };
