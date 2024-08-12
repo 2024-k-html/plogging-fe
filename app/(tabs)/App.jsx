@@ -13,6 +13,7 @@ import Quit from "./pages/Quit";
 import Course from "./pages/Course";
 import CourseMap from "./pages/CourseMap";
 import SignUp from "./pages/SignUp";
+import Chat from "./pages/Chat";
 
 import { createStackNavigator } from "@react-navigation/stack";
 
@@ -35,6 +36,7 @@ const HomeStack = () => {
       <Stack.Screen name="courseMap" component={CourseMap} />
       <Stack.Screen name="singup" component={SignUp} />
       <Stack.Screen name="login" component={Login} />
+      <Stack.Screen name="chat" component={Chat} />
     </Stack.Navigator>
   );
 };
@@ -52,6 +54,7 @@ const App = () => {
         <Drawer.Screen name="함께 해요" component={Gather} />
         <Drawer.Screen name="추천 코스" component={Course} />
         <Drawer.Screen name="회원가입" component={SignUp} />
+        <Drawer.Screen name="AI 채팅" component={Chat} />
       </Drawer.Navigator>
     </NavigationContainer>
   );
