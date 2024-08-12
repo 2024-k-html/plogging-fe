@@ -12,6 +12,8 @@ import Write from "./pages/Write";
 import Quit from "./pages/Quit";
 import Course from "./pages/Course";
 import CourseMap from "./pages/CourseMap";
+import SignUp from "./pages/SignUp";
+
 import { createStackNavigator } from "@react-navigation/stack";
 
 // Stack Navigator 생성
@@ -31,6 +33,8 @@ const HomeStack = () => {
       <Stack.Screen name="quit" component={Quit} />
       <Stack.Screen name="course" component={Course} />
       <Stack.Screen name="courseMap" component={CourseMap} />
+      <Stack.Screen name="singup" component={SignUp} />
+      <Stack.Screen name="login" component={Login} />
     </Stack.Navigator>
   );
 };
@@ -47,6 +51,7 @@ const App = () => {
         <Drawer.Screen name="랭킹" component={Ranking} />
         <Drawer.Screen name="함께 해요" component={Gather} />
         <Drawer.Screen name="추천 코스" component={Course} />
+        <Drawer.Screen name="회원가입" component={SignUp} />
       </Drawer.Navigator>
     </NavigationContainer>
   );
