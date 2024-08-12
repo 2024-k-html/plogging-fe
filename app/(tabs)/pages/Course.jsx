@@ -1,8 +1,30 @@
 import React from "react";
-import { SafeAreaView, ScrollView, Text, View } from "react-native";
+import { SafeAreaView, ScrollView, Text, View, Alert } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 
 const Course = ({ navigation }) => {
+  const handleCoursePress = (courseName, coordinates) => {
+    Alert.alert(
+      `${courseName} 코스로 플로깅을 시작하시겠습니까?`,
+      "",
+      [
+        {
+          text: "취소",
+          style: "cancel",
+        },
+        {
+          text: "시작",
+          onPress: () =>
+            navigation.navigate("courseMap", {
+              start: coordinates[0],
+              end: coordinates[1],
+            }),
+        },
+      ],
+      { cancelable: false }
+    );
+  };
+
   const renderCourse = (courseName, coordinates) => (
     <View className="w-1/2 p-1" key={courseName}>
       <Text className="text-center mt-1 mb-2 font-bold">{courseName}</Text>
@@ -14,13 +36,8 @@ const Course = ({ navigation }) => {
           latitudeDelta: 0.01,
           longitudeDelta: 0.01,
         }}
-        // **onPress 이벤트 추가**
-        onPress={() =>
-          navigation.navigate("courseMap", {
-            start: coordinates[0],
-            end: coordinates[1],
-          })
-        }
+        // onPress 이벤트를 handleCoursePress로 대체
+        onPress={() => handleCoursePress(courseName, coordinates)}
       >
         <Marker
           coordinate={{
@@ -40,10 +57,7 @@ const Course = ({ navigation }) => {
 
   return (
     <SafeAreaView className="flex-1 bg-white">
-      <View className="border-b py-4 mb-6 items-center">
-        <Text className="text-xl">플로깅 추천 코스</Text>
-      </View>
-      <ScrollView className="px-4">
+      <ScrollView className="px-4 py-4">
         {/* 처인구 */}
         <Text className="bg-yellow py-1 text-xl font-bold w-16 text-center mx-2">
           처인구

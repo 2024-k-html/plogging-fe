@@ -20,8 +20,8 @@ const Stack = createStackNavigator();
 // Home Stack Navigator
 const HomeStack = () => {
   return (
-    <Stack.Navigator initialRouteName="home">
-      <Stack.Screen name="home" component={Home} />
+    <Stack.Navigator>
+      <Stack.Screen name="용인시에서 플로깅해요 !" component={Home} />
       <Stack.Screen name="ranking" component={Ranking} />
       <Stack.Screen name="gather" component={Gather} />
       <Stack.Screen name="map" component={Map} />
@@ -42,11 +42,11 @@ const App = () => {
   return (
     <NavigationContainer independent={true}>
       <Drawer.Navigator initialRouteName="Home">
-        <Drawer.Screen name="Home" component={HomeStack} />
-        <Drawer.Screen name="Login" component={Login} />
-        <Drawer.Screen name="ranking" component={Ranking} />
-        <Drawer.Screen name="gather" component={Gather} />
-        <Stack.Screen name="course" component={Course} />
+        <Drawer.Screen name="홈" component={HomeStack} />
+        <Drawer.Screen name="로그인" component={Login} />
+        <Drawer.Screen name="랭킹" component={Ranking} />
+        <Drawer.Screen name="함께 해요" component={Gather} />
+        <Drawer.Screen name="추천 코스" component={Course} />
       </Drawer.Navigator>
     </NavigationContainer>
   );

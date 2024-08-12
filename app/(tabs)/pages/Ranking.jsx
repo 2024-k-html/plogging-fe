@@ -47,9 +47,6 @@ const Ranking = () => {
   return (
     <SafeAreaView style={styles.safeAreaView} className="flex-1 bg-white">
       <StatusBar style="dark" />
-      <View className="border-b border-gray py-4 items-center">
-        <Text className="text-xl">포인트 랭킹</Text>
-      </View>
       <ScrollView className="flex-1">
         <View style={styles.topRakingContainer} className="py-12">
           <View className="flex-row justify-center items-end">
