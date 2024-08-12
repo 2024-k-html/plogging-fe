@@ -5,6 +5,7 @@ import Ranking from "./pages/Ranking";
 import Gather from "./pages/Gather";
 import Map from "./pages/Map";
 import CameraScreen from "./pages/CameraScreen";
+import Post from "./pages/Post";
 import Login from "./pages/Login";
 
 const Stack = createStackNavigator();
@@ -17,6 +18,7 @@ const App = () => {
       <Stack.Screen name="gather" component={Gather} />
       <Stack.Screen name="map" component={Map} />
       <Stack.Screen name="camera" component={CameraScreen} />
+      <Stack.Screen name="post" component={Post} />
       <Stack.Screen name="login" component={Login} />
     </Stack.Navigator>
   );
