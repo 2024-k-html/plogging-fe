@@ -10,7 +10,7 @@ import {
 const green = require("../../../assets/image/green.png");
 const instagram = require("../../../assets/image/instagram.png");
 
-const Share = () => {
+const Share = ({ navigation }) => {
   return (
     <SafeAreaView className="bg-white flex-1">
       <Text className="text-center text-xl mt-10">
@@ -23,7 +23,10 @@ const Share = () => {
             플로깅 피드에 공유하기
           </Text>
         </TouchableOpacity>
-        <TouchableOpacity className="bg-yellow w-5/6 flex-row items-center justify-center rounded">
+        <TouchableOpacity
+          onPress={() => navigation.navigate("insta")}
+          className="bg-yellow w-5/6 flex-row items-center justify-center rounded"
+        >
           <Image source={instagram} className="w-8 h-8 mr-3" />
           <Text className="text-center text-xl py-4 font-bold">
             인스타그램 스토리로 공유하기

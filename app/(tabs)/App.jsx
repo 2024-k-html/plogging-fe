@@ -16,6 +16,7 @@ import SignUp from "./pages/SignUp";
 import Chat from "./pages/Chat";
 import EachPost from "./pages/EachPost";
 import Share from "./pages/Share";
+import InstaShare from "./pages/InstaShare";
 
 import { createStackNavigator } from "@react-navigation/stack";
 
@@ -59,6 +60,13 @@ const HomeStack = () => {
         component={EachPost}
       />
       <Stack.Screen name="share" component={Share} />
+      <Stack.Screen
+        options={{
+          headerShown: false,
+        }}
+        name="insta"
+        component={InstaShare}
+      />
     </Stack.Navigator>
   );
 };
