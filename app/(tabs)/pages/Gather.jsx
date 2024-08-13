@@ -1,5 +1,4 @@
-/* eslint-disable react/prop-types */
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   SafeAreaView,
   ScrollView,
@@ -13,7 +12,7 @@ import {
 // eslint-disable-next-line @typescript-eslint/no-var-requires, no-undef
 const ploggingGather = require("../../../assets/image/ploggingGather.png");
 
-const sampleData = [
+const initialData = [
   {
     area: "수지구",
     title: "성복천에서 같이 플로깅 해요 !",
@@ -65,7 +64,15 @@ const getBackgroundColor = (area) => {
   }
 };
 
-const Gather = ({ navigation }) => {
+const Gather = ({ route, navigation }) => {
+  const [sampleData, setSampleData] = useState(initialData);
+
+  useEffect(() => {
+    if (route.params?.newPost) {
+      setSampleData((prevData) => [route.params.newPost, ...prevData]);
+    }
+  }, [route.params?.newPost]);
+
   return (
     <SafeAreaView className="flex-1 bg-white">
       <StatusBar style="dark" />
