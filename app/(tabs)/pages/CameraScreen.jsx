@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 /* eslint-disable no-undef */
 /* eslint-disable @typescript-eslint/no-var-requires */
 import React, { useState, useRef } from 'react';

@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+/* eslint-disable react/prop-types */
 import React, { useState, useEffect, useRef } from 'react';
 import { View, Alert, TouchableOpacity, Image, Text } from 'react-native';
 import MapView, { Marker, Polyline } from 'react-native-maps';

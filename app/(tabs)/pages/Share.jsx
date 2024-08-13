@@ -1,14 +1,17 @@
-import React from "react";
+/* eslint-disable react/prop-types */
+/* eslint-disable no-undef */
+/* eslint-disable @typescript-eslint/no-var-requires */
+import React from 'react';
 import {
   View,
   Text,
   SafeAreaView,
   Image,
   TouchableOpacity,
-} from "react-native";
+} from 'react-native';
 
-const green = require("../../../assets/image/green.png");
-const instagram = require("../../../assets/image/instagram.png");
+const green = require('../../../assets/image/green.png');
+const instagram = require('../../../assets/image/instagram.png');
 
 const Share = ({ navigation }) => {
   return (
@@ -24,7 +27,7 @@ const Share = ({ navigation }) => {
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => navigation.navigate("insta")}
+          onPress={() => navigation.navigate('insta')}
           className="bg-yellow w-5/6 flex-row items-center justify-center rounded"
         >
           <Image source={instagram} className="w-8 h-8 mr-3" />

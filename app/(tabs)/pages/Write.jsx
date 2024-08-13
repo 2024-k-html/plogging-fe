@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+/* eslint-disable @typescript-eslint/no-var-requires */
 import React, { useState } from 'react';
 import {
   SafeAreaView,

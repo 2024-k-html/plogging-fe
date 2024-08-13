@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+/* eslint-disable react/prop-types */
+import React, { useState } from 'react';
 import {
   Text,
   TextInput,
@@ -9,15 +10,15 @@ import {
   Alert,
   KeyboardAvoidingView,
   Platform,
-} from "react-native";
-import { Dropdown } from "react-native-element-dropdown";
+} from 'react-native';
+import { Dropdown } from 'react-native-element-dropdown';
 
 const SignUp = ({ navigation }) => {
-  const [name, setName] = useState("");
-  const [area, setArea] = useState("");
-  const [userId, setUserId] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const [name, setName] = useState('');
+  const [area, setArea] = useState('');
+  const [userId, setUserId] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [isPasswordValid, setIsPasswordValid] = useState(true);
   const [isPasswordMatch, setIsPasswordMatch] = useState(true);
 
@@ -36,27 +37,27 @@ const SignUp = ({ navigation }) => {
   const handleSignUpPress = async () => {
     if (!isPasswordValid) {
       Alert.alert(
-        "비밀번호 오류",
-        "비밀번호는 8자 이상이어야 하며, 숫자, 영문, 특수문자를 포함해야 합니다."
+        '비밀번호 오류',
+        '비밀번호는 8자 이상이어야 하며, 숫자, 영문, 특수문자를 포함해야 합니다.',
       );
       return;
     }
 
     if (!isPasswordMatch) {
       Alert.alert(
-        "비밀번호 오류",
-        "비밀번호와 비밀번호 확인이 일치하지 않습니다."
+        '비밀번호 오류',
+        '비밀번호와 비밀번호 확인이 일치하지 않습니다.',
       );
       return;
     }
 
     if (!name || !area || !userId || !password || !confirmPassword) {
-      Alert.alert("입력 오류", "모든 필드를 입력해주세요.");
+      Alert.alert('입력 오류', '모든 필드를 입력해주세요.');
       return;
     }
 
-    Alert.alert("회원가입 성공", "회원가입이 완료되었습니다.");
-    navigation.replace("login");
+    Alert.alert('회원가입 성공', '회원가입이 완료되었습니다.');
+    navigation.replace('login');
   };
 
   const isFormValid =
@@ -72,8 +73,8 @@ const SignUp = ({ navigation }) => {
     <SafeAreaView className="bg-white flex-1">
       <KeyboardAvoidingView
         style={{ flex: 1 }}
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
-        keyboardVerticalOffset={Platform.OS === "ios" ? 64 : 0}
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        keyboardVerticalOffset={Platform.OS === 'ios' ? 64 : 0}
       >
         <ScrollView className="px-4 py-10">
           <Text className="text-3xl text-center mb-4">회원가입</Text>
@@ -92,9 +93,9 @@ const SignUp = ({ navigation }) => {
                 style={{ padding: 10 }}
                 placeholder="선택하세요"
                 data={[
-                  { label: "수지구", value: "suji" },
-                  { label: "기흥구", value: "giheung" },
-                  { label: "처인구", value: "cheoin" },
+                  { label: '수지구', value: 'suji' },
+                  { label: '기흥구', value: 'giheung' },
+                  { label: '처인구', value: 'cheoin' },
                 ]}
                 labelField="label"
                 valueField="value"
@@ -115,7 +116,7 @@ const SignUp = ({ navigation }) => {
             <Text className="mb-2 text-xl">비밀번호</Text>
             <TextInput
               className={`border w-full p-2 rounded ${
-                !isPasswordValid ? "border-coral" : ""
+                !isPasswordValid ? 'border-coral' : ''
               }`}
               secureTextEntry
               value={password}
@@ -132,7 +133,7 @@ const SignUp = ({ navigation }) => {
             <Text className="mb-2 text-xl">비밀번호 확인</Text>
             <TextInput
               className={`border w-full p-2 rounded ${
-                !isPasswordMatch ? "border-coral" : ""
+                !isPasswordMatch ? 'border-coral' : ''
               }`}
               secureTextEntry
               value={confirmPassword}
@@ -144,7 +145,7 @@ const SignUp = ({ navigation }) => {
           </View>
           <TouchableOpacity
             className={`bg-green rounded-md mt-10 ${
-              !isFormValid ? "opacity-50" : ""
+              !isFormValid ? 'opacity-50' : ''
             }`}
             disabled={!isFormValid}
             onPress={handleSignUpPress}

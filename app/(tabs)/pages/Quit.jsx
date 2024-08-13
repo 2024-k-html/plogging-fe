@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+/* eslint-disable @typescript-eslint/no-var-requires */
 import React from 'react';
 import { Image, SafeAreaView, Text, View } from 'react-native';
 
