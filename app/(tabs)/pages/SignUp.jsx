@@ -69,8 +69,17 @@ const SignUp = ({ navigation }) => {
     );
 
     if (response.status === 201) {
-      Alert.alert('회원가입 성공', '회원가입이 완료되었습니다.');
-      navigation.replace('login');
+      Alert.alert(
+        '회원가입 성공',
+        '회원가입이 완료되었습니다.',
+        [
+          {
+            text: 'OK',
+            onPress: () => navigation.replace('login'),
+          },
+        ],
+        { cancelable: false },
+      );
     }
   };
 
