@@ -21,11 +21,11 @@ RUN npm install -g @expo/ngrok
 # /app 디렉터리 생성 및 권한 설정
 RUN mkdir /app && chown root:root /app
 
-# package.json과 package-lock.json 파일 복사
-COPY package*.json ./
-
 # 작업 디렉터리 설정
 WORKDIR /app
+
+# package.json과 package-lock.json 파일 복사
+COPY package*.json /app/
 
 # npm 패키지 설치
 RUN npm install 
