@@ -89,6 +89,7 @@ const App = () => {
         <Drawer.Screen name="함께 해요" component={Gather} />
         <Drawer.Screen name="추천 코스" component={Course} />
         <Drawer.Screen name="AI 채팅" component={Chat} />
+        <Drawer.Screen name="로그인" component={Login} />
       </Drawer.Navigator>
     </NavigationContainer>
   );
