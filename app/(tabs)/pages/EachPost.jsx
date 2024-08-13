@@ -1,4 +1,6 @@
-import React from "react";
+/* eslint-disable no-undef */
+/* eslint-disable @typescript-eslint/no-var-requires */
+import React from 'react';
 import {
   Text,
   View,
@@ -6,9 +8,9 @@ import {
   Image,
   ScrollView,
   TouchableOpacity,
-} from "react-native";
+} from 'react-native';
 
-const plogging_image = require("../../../assets/image/ploggingSignup.jpg");
+const plogging_image = require('../../../assets/image/ploggingSignup.jpg');
 
 const EachPost = ({ navigation, route }) => {
   const { title, startDate, endDate, context, maxPeople, currentPeople, area } =
@@ -38,7 +40,7 @@ const EachPost = ({ navigation, route }) => {
           </View>
           <View className="flex justify-center items-center mt-10">
             <TouchableOpacity
-              onPress={() => navigation.replace("map")}
+              onPress={() => navigation.replace('map')}
               className="bg-green w-5/6 rounded-lg"
             >
               <Text className="text-center py-2 text-xl font-bold">
@@ -47,7 +49,7 @@ const EachPost = ({ navigation, route }) => {
             </TouchableOpacity>
             <TouchableOpacity
               className="bg-green w-5/6 mt-4 mb-10 rounded-lg"
-              onPress={() => navigation.replace("gather")}
+              onPress={() => navigation.goBack('gather')}
             >
               <Text className="text-center py-2 text-xl font-bold">
                 뒤로 가기

@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+import axios from 'axios';
 import React, { useState } from 'react';
 import {
   Text,
@@ -35,6 +36,8 @@ const SignUp = ({ navigation }) => {
   };
 
   const handleSignUpPress = async () => {
+    console.log(userId, password, name);
+
     if (!isPasswordValid) {
       Alert.alert(
         '비밀번호 오류',
@@ -56,8 +59,19 @@ const SignUp = ({ navigation }) => {
       return;
     }
 
-    Alert.alert('회원가입 성공', '회원가입이 완료되었습니다.');
-    navigation.replace('login');
+    const response = await axios.post(
+      'http://hwangbbang.koreacentral.cloudapp.azure.com:8080/users/sign-up',
+      {
+        username: userId,
+        password: password,
+        name: name,
+      },
+    );
+
+    if (response.status === 201) {
+      Alert.alert('회원가입 성공', '회원가입이 완료되었습니다.');
+      navigation.replace('login');
+    }
   };
 
   const isFormValid =

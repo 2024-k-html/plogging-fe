@@ -65,7 +65,15 @@ const getBackgroundColor = (area) => {
   }
 };
 
-const Gather = () => {
+const Gather = ({ route, navigation }) => {
+  const [sampleData, setSampleData] = useState(initialData);
+
+  useEffect(() => {
+    if (route?.params?.newPost) {
+      setSampleData((prevData) => [route.params.newPost, ...prevData]);
+    }
+  }, [route.params?.newPost]);
+
   return (
     <SafeAreaView className="flex-1 bg-white">
       <StatusBar style="dark" />
