@@ -85,12 +85,10 @@ const App = () => {
             headerShown: false,
           }}
         />
-        <Drawer.Screen name="로그인" component={Login} />
         <Drawer.Screen name="랭킹" component={Ranking} />
         <Drawer.Screen name="함께 해요" component={Gather} />
         <Drawer.Screen name="추천 코스" component={Course} />
         <Drawer.Screen name="AI 채팅" component={Chat} />
-        <Drawer.Screen name="공유하기" component={Share} />
       </Drawer.Navigator>
     </NavigationContainer>
   );

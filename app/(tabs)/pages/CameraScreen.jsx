@@ -30,10 +30,6 @@ const CameraScreen = () => {
     );
   }
 
-  function toggleCameraFacing() {
-    setFacing((current) => (current === "back" ? "front" : "back"));
-  }
-
   const takePicture = async () => {
     if (cameraRef.current) {
       try {
@@ -48,14 +44,8 @@ const CameraScreen = () => {
   return (
     <View className="flex-1 justify-center">
       {!cameraImage ? (
-        <CameraView style={{ flex: 1 }} type={facing} ref={cameraRef}>
+        <CameraView className="flex-1" type={facing} ref={cameraRef}>
           <View className="flex-1 flex-row bg-transparent">
-            <TouchableOpacity
-              className="absolute bottom-5 left-5 p-2 rounded-full flex-1 bg-white"
-              onPress={toggleCameraFacing}
-            >
-              <Image className="w-10 h-10" source={camera_change} />
-            </TouchableOpacity>
             <TouchableOpacity
               className="absolute bottom-5 right-5 p-2 rounded-full bg-white"
               onPress={takePicture}

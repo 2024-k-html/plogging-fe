@@ -11,7 +11,6 @@ import {
   Platform,
 } from "react-native";
 import { Dropdown } from "react-native-element-dropdown";
-import axios from "axios";
 
 const SignUp = ({ navigation }) => {
   const [name, setName] = useState("");
@@ -56,27 +55,8 @@ const SignUp = ({ navigation }) => {
       return;
     }
 
-    // 회원가입 API 요청
-    try {
-      const response = await axios.post("http://localhost:8080/users/sign-up", {
-        username: userId,
-        password: password,
-        name: name,
-      });
-
-      if (response.status === 200) {
-        Alert.alert("회원가입 성공", "회원가입이 완료되었습니다.");
-        navigation.navigate("login");
-      } else {
-        Alert.alert("회원가입 실패", "다시 시도해주세요.");
-      }
-    } catch (error) {
-      console.error(error);
-      Alert.alert(
-        "오류",
-        error.response?.data?.message || "네트워크 오류가 발생했습니다."
-      );
-    }
+    Alert.alert("회원가입 성공", "회원가입이 완료되었습니다.");
+    navigation.replace("login");
   };
 
   const isFormValid =
