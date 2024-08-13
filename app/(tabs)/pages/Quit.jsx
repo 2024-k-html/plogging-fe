@@ -1,7 +1,7 @@
-import React from "react";
-import { Image, SafeAreaView, Text, View } from "react-native";
+import React from 'react';
+import { Image, SafeAreaView, Text, View } from 'react-native';
 
-const yong = require("../../../assets/image/greenYong.png");
+const yong = require('../../../assets/image/greenYong.png');
 
 const Quit = () => {
   return (

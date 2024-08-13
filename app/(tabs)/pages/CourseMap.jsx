@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useRef } from "react";
-import { View, Alert, TouchableOpacity, Image, Text } from "react-native";
-import MapView, { Marker, Polyline } from "react-native-maps";
-import * as Location from "expo-location";
-import { SafeAreaView } from "react-native";
-import haversine from "haversine";
+import React, { useState, useEffect, useRef } from 'react';
+import { View, Alert, TouchableOpacity, Image, Text } from 'react-native';
+import MapView, { Marker, Polyline } from 'react-native-maps';
+import * as Location from 'expo-location';
+import { SafeAreaView } from 'react-native';
+import haversine from 'haversine';
 
 const CourseMap = ({ navigation, route }) => {
   const [location, setLocation] = useState(null);
@@ -19,8 +19,8 @@ const CourseMap = ({ navigation, route }) => {
   const mapRef = useRef(null);
 
   useEffect(() => {
-    console.log("Start:", start);
-    console.log("End:", end);
+    console.log('Start:', start);
+    console.log('End:', end);
   }, [start, end]);
 
   useEffect(() => {
@@ -43,24 +43,24 @@ const CourseMap = ({ navigation, route }) => {
   useEffect(() => {
     (async () => {
       let { status } = await Location.getForegroundPermissionsAsync();
-      if (status !== "granted") {
+      if (status !== 'granted') {
         Alert.alert(
-          "위치 권한 요청",
-          "앱 사용 중에 위치 정보를 사용하도록 허용하시겠습니까?",
+          '위치 권한 요청',
+          '앱 사용 중에 위치 정보를 사용하도록 허용하시겠습니까?',
           [
             {
-              text: "아니요",
+              text: '아니요',
               onPress: () =>
-                setErrorMsg("Permission to access location was denied"),
-              style: "cancel",
+                setErrorMsg('Permission to access location was denied'),
+              style: 'cancel',
             },
             {
-              text: "네",
+              text: '네',
               onPress: async () => {
                 let { status } =
                   await Location.requestForegroundPermissionsAsync();
-                if (status !== "granted") {
-                  setErrorMsg("Permission to access location was denied");
+                if (status !== 'granted') {
+                  setErrorMsg('Permission to access location was denied');
                   return;
                 }
                 setHasLocationPermission(true);
@@ -99,21 +99,21 @@ const CourseMap = ({ navigation, route }) => {
                         };
 
                         const distance = haversine(prevLocation, newLocation, {
-                          unit: "km",
+                          unit: 'km',
                         });
                         setDistanceTravelled(
-                          (prevDistance) => prevDistance + distance
+                          (prevDistance) => prevDistance + distance,
                         );
                       }
 
                       return newRoute;
                     });
-                  }
+                  },
                 );
               },
             },
           ],
-          { cancelable: false }
+          { cancelable: false },
         );
       } else {
         setHasLocationPermission(true);
@@ -152,14 +152,14 @@ const CourseMap = ({ navigation, route }) => {
                 };
 
                 const distance = haversine(prevLocation, newLocation, {
-                  unit: "km",
+                  unit: 'km',
                 });
                 setDistanceTravelled((prevDistance) => prevDistance + distance);
               }
 
               return newRoute;
             });
-          }
+          },
         );
       }
     })();
@@ -179,32 +179,32 @@ const CourseMap = ({ navigation, route }) => {
   const handleStopPlogging = () => {
     stopTimer(); // 시간 멈춤
     Alert.alert(
-      "플로깅을 중단하시겠습니까?",
-      "",
+      '플로깅을 중단하시겠습니까?',
+      '',
       [
         {
-          text: "취소",
+          text: '취소',
           onPress: () => {
             startTimer(); // 시간 재개
           },
-          style: "cancel",
+          style: 'cancel',
         },
         {
-          text: "중단",
+          text: '중단',
           onPress: () => {
-            navigation.replace("camera");
+            navigation.replace('camera');
           },
-          style: "destructive",
+          style: 'destructive',
         },
       ],
-      { cancelable: false }
+      { cancelable: false },
     );
   };
 
   const formatTime = (seconds) => {
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
-    return `${String(mins).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
+    return `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
   };
 
   if (!location) {
@@ -273,7 +273,7 @@ const CourseMap = ({ navigation, route }) => {
       <View className="bg-blue absolute bottom-5 right-5 rounded p-3 z-10">
         <TouchableOpacity onPress={focusCurrentLocation}>
           <Image
-            source={require("../../../assets/image/gps.png")}
+            source={require('../../../assets/image/gps.png')}
             className="w-5 h-5"
           />
         </TouchableOpacity>

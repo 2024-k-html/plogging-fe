@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   Image,
   SafeAreaView,
@@ -6,9 +6,9 @@ import {
   Text,
   TouchableOpacity,
   ScrollView,
-} from "react-native";
+} from 'react-native';
 
-const insta = require("../../../assets/image/instagramShare.png");
+const insta = require('../../../assets/image/instagramShare.png');
 
 const InstaShare = () => {
   return (

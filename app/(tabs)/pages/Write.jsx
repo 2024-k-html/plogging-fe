@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -6,13 +6,13 @@ import {
   View,
   TouchableOpacity,
   Image,
-} from "react-native";
-import * as ImagePicker from "expo-image-picker";
+} from 'react-native';
+import * as ImagePicker from 'expo-image-picker';
 
-const location = require("../../../assets/image/location.png");
-const time = require("../../../assets/image/time.png");
-const distance = require("../../../assets/image/distance.png");
-const trashBin = require("../../../assets/image/trashBin.png");
+const location = require('../../../assets/image/location.png');
+const time = require('../../../assets/image/time.png');
+const distance = require('../../../assets/image/distance.png');
+const trashBin = require('../../../assets/image/trashBin.png');
 
 const Write = () => {
   const [selectedImage, setSelectedImage] = useState(null);
@@ -21,7 +21,7 @@ const Write = () => {
     // 갤러리 접근 권한 요청
     let result = await ImagePicker.requestMediaLibraryPermissionsAsync();
     if (result.granted === false) {
-      alert("사진에 접근할 권한이 필요합니다.");
+      alert('사진에 접근할 권한이 필요합니다.');
       return;
     }
 
@@ -47,12 +47,12 @@ const Write = () => {
         <TouchableOpacity
           onPress={pickImage}
           className="border border-gray-300 rounded-md p-6 items-center justify-center"
-          style={{ height: 200, borderStyle: "dashed" }}
+          style={{ height: 200, borderStyle: 'dashed' }}
         >
           {selectedImage ? (
             <Image
               source={{ uri: selectedImage }}
-              style={{ width: "100%", height: "100%", borderRadius: 8 }}
+              style={{ width: '100%', height: '100%', borderRadius: 8 }}
             />
           ) : (
             <Text className="text-gray-400">클릭하여 사진 업로드(필수)</Text>
