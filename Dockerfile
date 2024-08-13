@@ -14,9 +14,9 @@ ENV PATH=/home/node/.npm-global/bin:$PATH
 
 # npm 최신 버전 설치
 RUN npm install -g npm@latest
-RUN npm install uuid@latest
+
 # ngrok 설치 (npm 사용)
-RUN npm install -g @expo/ngrok
+RUN npm install @expo/ngrok
 
 # /app 디렉터리 생성 및 권한 설정
 RUN mkdir /app && chown root:root /app
