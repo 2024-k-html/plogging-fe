@@ -13,12 +13,6 @@ import { StatusBar } from "expo-status-bar";
 const plogging_image = require("../../../assets/image/homePlogging.png");
 
 const Home = ({ navigation }) => {
-  // useEffect(()=>{
-  //   try{
-  //     const response = await axios.get("http://localhost:8080/users/me");
-  //   }
-  // })
-
   return (
     <SafeAreaView className="flex-1 bg-white items-center">
       <StatusBar style="dark" />
@@ -27,11 +21,11 @@ const Home = ({ navigation }) => {
         <Text className="pl-2 mb-3">현재까지</Text>
         <View className="items-center">
           <Text className="text-lg">
-            <Text className="font-bold text-xl text-green">10.4 km</Text>를
+            <Text className="font-bold text-xl text-green">2.6 km</Text>를
             걸으면서
           </Text>
           <Text className="text-lg mb-3">
-            <Text className="font-bold text-xl text-green">107개</Text>의
+            <Text className="font-bold text-xl text-green">34개</Text>의
             쓰레기를 주웠어요 !
           </Text>
         </View>

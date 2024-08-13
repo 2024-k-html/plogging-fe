@@ -5,7 +5,7 @@ import MapView, { Marker } from "react-native-maps";
 const Course = ({ navigation }) => {
   const handleCoursePress = (courseName, coordinates) => {
     Alert.alert(
-      `${courseName} 코스로 플로깅을 시작하시겠습니까?`,
+      `${courseName} 코스로 플로깅을 시작하시겠습니까?\n\n시작 지점에 해당하는 장소 부근에 가서 플로깅을 시작해보세요!`,
       "",
       [
         {

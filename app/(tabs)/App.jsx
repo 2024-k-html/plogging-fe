@@ -15,6 +15,8 @@ import CourseMap from "./pages/CourseMap";
 import SignUp from "./pages/SignUp";
 import Chat from "./pages/Chat";
 import EachPost from "./pages/EachPost";
+import Share from "./pages/Share";
+import InstaShare from "./pages/InstaShare";
 
 import { createStackNavigator } from "@react-navigation/stack";
 
@@ -57,6 +59,14 @@ const HomeStack = () => {
         }}
         component={EachPost}
       />
+      <Stack.Screen name="share" component={Share} />
+      <Stack.Screen
+        options={{
+          headerShown: false,
+        }}
+        name="insta"
+        component={InstaShare}
+      />
     </Stack.Navigator>
   );
 };
@@ -75,11 +85,11 @@ const App = () => {
             headerShown: false,
           }}
         />
-        <Drawer.Screen name="로그인" component={Login} />
         <Drawer.Screen name="랭킹" component={Ranking} />
         <Drawer.Screen name="함께 해요" component={Gather} />
         <Drawer.Screen name="추천 코스" component={Course} />
         <Drawer.Screen name="AI 채팅" component={Chat} />
+        <Drawer.Screen name="로그인" component={Login} />
       </Drawer.Navigator>
     </NavigationContainer>
   );

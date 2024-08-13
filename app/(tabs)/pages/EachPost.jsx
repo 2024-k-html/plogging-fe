@@ -10,21 +10,32 @@ import {
 
 const plogging_image = require("../../../assets/image/ploggingSignup.jpg");
 
-const EachPost = ({ navigation }) => {
+const EachPost = ({ navigation, route }) => {
+  const { title, startDate, endDate, context, maxPeople, currentPeople, area } =
+    route.params;
+  const sentences = context.split(/(?<=[.!?])\s+/);
   return (
     <SafeAreaView className="flex-1 bg-white">
       <ScrollView>
         <Image source={plogging_image} className="w-full h-56 resize-contain" />
-        <View className=" ml-4 ">
-          <Text className="text-2xl font-bold mt-4">제목</Text>
+        <View className=" mx-4 ">
+          <Text className="text-xl font-bold mt-4">{title}</Text>
           <Text className="mt-2 text-blue text-base">
-            시작 날짜 ~ 종료 날짜
+            {startDate} ~ {endDate}
           </Text>
           <View className="flex-row">
-            <Text className="mt-2 mr-10">n / 모집 인원</Text>
-            <Text className="mt-2">지역</Text>
+            <Text className="mt-2 mr-10">
+              현재 인원 : {currentPeople} / {maxPeople}
+            </Text>
+            <Text className="mt-2">{area}</Text>
           </View>
-          <Text className="mt-4">내용</Text>
+          <View className="mt-4">
+            {sentences.map((sentence, index) => (
+              <Text key={index} className="text-base break-words">
+                {sentence}
+              </Text>
+            ))}
+          </View>
           <View className="flex justify-center items-center mt-10">
             <TouchableOpacity
               onPress={() => navigation.replace("map")}
@@ -35,7 +46,7 @@ const EachPost = ({ navigation }) => {
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
-              className="bg-green w-5/6 mt-4 rounded-lg"
+              className="bg-green w-5/6 mt-4 mb-10 rounded-lg"
               onPress={() => navigation.replace("gather")}
             >
               <Text className="text-center py-2 text-xl font-bold">

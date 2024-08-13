@@ -14,7 +14,7 @@ import {
 
 const plogging_icon = require("../../../assets/image/ploggingIcon2.png");
 
-const Login = () => {
+const Login = ({ navigation }) => {
   const [userId, setUserId] = useState("");
   const [password, setPassword] = useState("");
 
@@ -26,6 +26,7 @@ const Login = () => {
 
     // 회원가입 처리 로직
     Alert.alert("회원가입 성공", "회원가입이 완료되었습니다.");
+    navigation.navigate("home");
   };
 
   return (
