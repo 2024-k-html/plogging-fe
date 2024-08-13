@@ -12,13 +12,11 @@ ENV REACT_NATIVE_PACKAGER_HOSTNAME="192.168.0.73"
 ENV NPM_CONFIG_PREFIX=/home/node/.npm-global 
 ENV PATH=/home/node/.npm-global/bin:$PATH
 
-# npm, expo-cli 설치
-RUN npm install -g npm@latest && \
-    npm install -g expo-cli@latest
+# npm 최신 버전 설치
+RUN npm install -g npm@latest
 
 # 필수 패키지 설치
-RUN apk add --no-cache qemu-user-static && \
-    npm install -g yarn
+RUN apk add --no-cache yarn
 
 # ngrok 설치
 RUN yarn global add @expo/ngrok
