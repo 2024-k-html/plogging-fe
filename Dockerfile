@@ -22,7 +22,7 @@ RUN npm install -g @expo/ngrok
 RUN mkdir /app && chown root:root /app
 
 # package.json과 package-lock.json 파일 복사
-COPY package.json package-lock.json /app/
+COPY package*.json ./
 
 # 작업 디렉터리 설정
 WORKDIR /app
@@ -34,4 +34,4 @@ RUN npm install
 COPY . .
 
 # Expo 개발 서버 시작
-CMD ["npx", "expo", "start"]
+CMD ["npx", "expo", "start", "--tunnel"]
