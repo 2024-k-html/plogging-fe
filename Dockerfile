@@ -15,22 +15,22 @@ ENV PATH=/home/node/.npm-global/bin:$PATH
 # npm 최신 버전 설치
 RUN npm install -g npm@latest
 
-# 필수 패키지 설치
-RUN apk add --no-cache yarn
+# ngrok 설치 (npm 사용)
+RUN npm install -g @expo/ngrok
 
-# ngrok 설치
-RUN yarn global add @expo/ngrok
-
+# /app 디렉터리 생성 및 권한 설정
 RUN mkdir /app && chown root:root /app
- 
-WORKDIR /app
-ENV PATH=/app/bin:$PATH
-USER root 
 
-COPY package.json package-lock.json ./ 
+# 작업 디렉터리 설정
+WORKDIR /app
+
+# package.json과 package-lock.json 파일 복사
+COPY package.json package-lock.json ./
+
+# npm 패키지 설치
 RUN npm install 
 
-# 소스 코드 복사
+# 나머지 소스 코드 복사
 COPY . .
 
 # Expo 개발 서버 시작
