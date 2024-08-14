@@ -7,6 +7,9 @@ WORKDIR /app
 # Expo CLI 설치
 RUN npm install -g expo-cli
 
+# @expo/ngrok 패키지 설치
+RUN npm install -g @expo/ngrok
+
 # 앱의 package.json 및 package-lock.json 복사
 COPY package*.json ./
 
