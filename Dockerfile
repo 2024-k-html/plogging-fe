@@ -40,4 +40,4 @@ COPY --chown=node:node . .
 USER node
 
 # Expo 개발 서버 시작
-CMD ["npx", "expo", "start", "--tunnel", "--non-interactive"]
+CMD ["npx", "expo", "start", "--non-interactive"]
