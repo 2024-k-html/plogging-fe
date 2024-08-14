@@ -58,6 +58,7 @@ ENV REACT_NATIVE_PACKAGER_HOSTNAME="40.82.155.26"
 ENV NPM_CONFIG_PREFIX=/home/node/.npm-global 
 ENV PATH=/home/node/.npm-global/bin:$PATH
 
+RUN apt-get -y update 
 # npm 최신 버전 설치
 RUN npm install -g npm@latest
 
