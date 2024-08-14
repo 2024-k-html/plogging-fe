@@ -7,7 +7,7 @@ ARG PORT=8081
 ENV PORT=$PORT
 EXPOSE 8081 8082 8083 
 
-ENV REACT_NATIVE_PACKAGER_HOSTNAME="40.82.155.26" 
+ENV REACT_NATIVE_PACKAGER_HOSTNAME="40.82.155.26"
 
 ENV NPM_CONFIG_PREFIX=/home/node/.npm-global 
 ENV PATH=/home/node/.npm-global/bin:$PATH
@@ -18,8 +18,8 @@ RUN apk add --no-cache bash
 # npm 최신 버전으로 업데이트
 RUN npm install -g npm@latest
 
-# @expo/ngrok를 전역 설치하여 CommandError 방지
-RUN npm install -g @expo/ngrok@4.1.0
+# @expo/ngrok를 미리 전역 설치하여 CommandError 방지
+RUN npm install -g @expo/ngrok@^4.1.0
 
 # /app 디렉터리 생성 및 node 사용자에게 소유권 설정
 RUN mkdir /app && chown -R node:node /app
@@ -39,5 +39,8 @@ COPY --chown=node:node . .
 # 루트가 아닌 'node' 사용자로 실행
 USER node
 
+# CI 모드를 활성화하여 Expo 개발 서버 시작
+ENV CI=1
+
 # Expo 개발 서버 시작
-CMD ["npx", "expo", "start", "--tunnel", "--non-interactive"]
+CMD ["npx", "expo", "start", "--tunnel"]
