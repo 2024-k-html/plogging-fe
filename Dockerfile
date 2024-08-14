@@ -18,6 +18,9 @@ RUN apk add --no-cache bash
 # npm 최신 버전으로 업데이트
 RUN npm install -g npm@latest
 
+# @expo/ngrok를 전역 설치하여 CommandError 방지
+RUN npm install -g @expo/ngrok@4.1.0
+
 # /app 디렉터리 생성 및 node 사용자에게 소유권 설정
 RUN mkdir /app && chown -R node:node /app
 
@@ -37,4 +40,4 @@ COPY --chown=node:node . .
 USER node
 
 # Expo 개발 서버 시작
-CMD ["npx", "expo", "start", "--non-interactive"]
+CMD ["npx", "expo", "start", "--tunnel", "--non-interactive"]
