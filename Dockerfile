@@ -26,7 +26,7 @@ RUN npm install
 # 소스 코드를 마지막에 복사함 (가장 자주 변경되기 때문)
 WORKDIR /opt/react_native_app/app
 # 개발 환경에서는 볼륨을 바인드 마운트; 프로덕션에서는 주석 처리
-COPY ./react_native_app .
+COPY ./app .
 
 # npm run 명령어를 기본 엔트리포인트로 설정
 ENTRYPOINT ["npm", "run"]
