@@ -20,7 +20,8 @@ RUN npm i --unsafe-perm --allow-root -g npm@latest expo-cli@latest
 RUN mkdir /opt/react_native_app
 WORKDIR /opt/react_native_app
 ENV PATH /opt/react_native_app/.bin:$PATH
-COPY ./react_native_app/package.json ./react_native_app/package-lock.json ./
+
+COPY ./package.json ./package-lock.json ./
 RUN npm install
 
 # 소스 코드를 마지막에 복사함 (가장 자주 변경되기 때문)
