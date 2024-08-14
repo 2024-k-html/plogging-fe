@@ -12,14 +12,14 @@ ENV REACT_NATIVE_PACKAGER_HOSTNAME="40.82.155.26"
 ENV NPM_CONFIG_PREFIX=/home/node/.npm-global 
 ENV PATH=/home/node/.npm-global/bin:$PATH
 
-# 필요하다면 bash와 기타 의존성 설치
+# 필요한 경우 bash와 기타 의존성 설치
 RUN apk add --no-cache bash
 
 # npm 최신 버전으로 업데이트
 RUN npm install -g npm@latest
 
-# npm을 사용하여 ngrok 설치
-RUN npm install -g @expo/ngrok 
+# @expo/ngrok를 미리 전역 설치하여 CommandError 방지
+RUN npm install -g @expo/ngrok@^4.1.0
 
 # /app 디렉터리 생성 및 node 사용자에게 소유권 설정
 RUN mkdir /app && chown -R node:node /app
@@ -40,4 +40,4 @@ COPY --chown=node:node . .
 USER node
 
 # Expo 개발 서버 시작
-CMD ["npx", "expo", "start", "--tunnel"]
+CMD ["npx", "expo", "start", "--tunnel", "--non-interactive"]
