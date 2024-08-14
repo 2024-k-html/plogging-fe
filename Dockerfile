@@ -1,49 +1,23 @@
+# Expo CLI를 사용하여 빌드 환경 설정
 FROM node:18-alpine
 
-ARG NODE_ENV=production 
-ENV NODE_ENV=$NODE_ENV
-
-ARG PORT=8081 
-ENV PORT=$PORT
-EXPOSE 8081 8082 8083 
-
-ENV REACT_NATIVE_PACKAGER_HOSTNAME="40.82.155.26" 
-
-ENV NPM_CONFIG_PREFIX=/home/node/.npm-global 
-ENV PATH=/home/node/.npm-global/bin:$PATH
-
-# 필요한 경우 bash와 기타 의존성 설치
-RUN apk add --no-cache bash
-
-# npm 최신 버전으로 업데이트
-RUN npm install -g npm@latest
-
-# @expo/ngrok를 전역으로 설치
-RUN npm install -g @expo/ngrok@^4.1.0
-
-# /app 디렉터리 생성 및 node 사용자에게 소유권 설정
-RUN mkdir /app && chown -R node:node /app
-
-# 작업 디렉터리 설정
+# 작업 디렉토리 설정
 WORKDIR /app
 
-# package.json과 package-lock.json 먼저 복사하여 Docker 캐시 활용
-COPY --chown=node:node package*.json ./
+# 필요한 패키지 설치
+RUN apk add --no-cache bash git
 
-# @expo/ngrok을 프로젝트의 devDependencies로 설치
-RUN npm install --save-dev @expo/ngrok@^4.1.0
+# npm 최신 버전으로 업데이트 및 Expo CLI 설치
+RUN npm install -g npm@latest expo-cli
+
+# 앱의 package.json 및 package-lock.json 복사
+COPY package*.json ./
 
 # npm 패키지 설치
 RUN npm install
 
-# 나머지 소스 코드 복사
-COPY --chown=node:node . .
+# 전체 소스 코드 복사
+COPY . .
 
-# 루트가 아닌 'node' 사용자로 실행
-USER node
-
-# CI 모드를 활성화하여 Expo 개발 서버 시작
-ENV CI=1
-
-# Expo 개발 서버 시작
-CMD ["npx", "expo", "start", "--tunnel"]
+# Expo를 사용하여 앱 빌드 또는 로컬 서버 실행
+CMD ["expo", "start", "--tunnel"]
