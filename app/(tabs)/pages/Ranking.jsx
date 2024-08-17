@@ -47,9 +47,6 @@ const Ranking = () => {
   return (
     <SafeAreaView style={styles.safeAreaView} className="flex-1 bg-white">
       <StatusBar style="dark" />
-      <View className="border-b border-gray py-4 items-center">
-        <Text className="text-xl">포인트 랭킹</Text>
-      </View>
       <ScrollView className="flex-1">
         <View style={styles.topRakingContainer} className="py-12">
           <View className="flex-row justify-center items-end shadow-lg">
@@ -57,13 +54,13 @@ const Ranking = () => {
               let height, bgColorStyle, circleColorStyle;
 
               // 1등
-              if (index === 1) {
+              if (index === 0) {
                 bgColorStyle = styles.firstPlace;
                 height = 'h-48';
                 circleColorStyle = styles.firstPlaceCircle;
               }
               // 2등
-              else if (index === 0) {
+              else if (index === 1) {
                 bgColorStyle = styles.secondPlace;
                 height = 'h-36';
                 circleColorStyle = styles.secondPlaceCircle;

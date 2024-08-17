@@ -14,27 +14,20 @@ import {
   KeyboardAvoidingView,
   Platform,
 } from 'react-native';
-} from 'react-native';
 
-const plogging_icon = require('../../../assets/image/ploggingIcon2.png');
 const plogging_icon = require('../../../assets/image/ploggingIcon2.png');
 
 const Login = ({ navigation }) => {
-  const [userId, setUserId] = useState('');
-  const [password, setPassword] = useState('');
   const [userId, setUserId] = useState('');
   const [password, setPassword] = useState('');
 
   const handleSignUpPress = () => {
     if (!userId || !password) {
       Alert.alert('입력 오류', '아이디와 비밀번호를 모두 입력해주세요');
-      Alert.alert('입력 오류', '아이디와 비밀번호를 모두 입력해주세요');
       return;
     }
 
     // 회원가입 처리 로직
-    Alert.alert('회원가입 성공', '회원가입이 완료되었습니다.');
-    navigation.navigate('home');
     Alert.alert('회원가입 성공', '회원가입이 완료되었습니다.');
     navigation.navigate('home');
   };
@@ -43,8 +36,6 @@ const Login = ({ navigation }) => {
     <SafeAreaView className="flex-1 bg-white">
       <KeyboardAvoidingView
         style={{ flex: 1 }}
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        keyboardVerticalOffset={Platform.OS === 'ios' ? 64 : 0}
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         keyboardVerticalOffset={Platform.OS === 'ios' ? 64 : 0}
       >

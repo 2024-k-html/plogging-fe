@@ -20,27 +20,6 @@ import InstaShare from './pages/InstaShare';
 
 import { createStackNavigator } from '@react-navigation/stack';
 
-import { createDrawerNavigator } from '@react-navigation/drawer';
-import { NavigationContainer } from '@react-navigation/native';
-import Home from './pages/Home';
-import Ranking from './pages/Ranking';
-import Gather from './pages/Gather';
-import Map from './pages/Map';
-import CameraScreen from './pages/CameraScreen';
-import Post from './pages/Post';
-import Login from './pages/Login';
-import Write from './pages/Write';
-import Quit from './pages/Quit';
-import Course from './pages/Course';
-import CourseMap from './pages/CourseMap';
-import SignUp from './pages/SignUp';
-import Chat from './pages/Chat';
-import EachPost from './pages/EachPost';
-import Share from './pages/Share';
-import InstaShare from './pages/InstaShare';
-
-import { createStackNavigator } from '@react-navigation/stack';
-
 // Stack Navigator 생성
 const Stack = createStackNavigator();
 
@@ -48,18 +27,12 @@ const Stack = createStackNavigator();
 const HomeStack = () => {
   return (
     <Stack.Navigator initialRouteName="home">
-      <Stack.Screen
-        name="signup"
-        component={SignUp}
-        options={{
-          headerShown: false,
-        }}
-      />
+      <Stack.Screen name="signup" component={SignUp} />
       <Stack.Screen
         name="home"
         component={Home}
         options={{
-          headerShown: false,
+          headerShown: true,
         }}
       />
       <Stack.Screen name="ranking" component={Ranking} />
