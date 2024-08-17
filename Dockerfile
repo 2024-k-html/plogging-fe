@@ -1,23 +1,23 @@
-# ======빌드 스테이지=======
-FROM node:20-alpine
+# 안정적인 Node.js LTS 버전 사용
+FROM node:16
 
-# 작업 디렉토리 설정
+# 글로벌로 @expo/ngrok 설치
+RUN npm install -g @expo/ngrok
+
+# 컨테이너 내 작업 디렉토리 설정
 WORKDIR /app
 
-# 의존성 파일 복사 및 설치
+# 의존성 파일만 복사하여 캐싱 최적화
 COPY package.json yarn.lock ./
+
+# 의존성 설치
 RUN yarn install
+
+# 나머지 프로젝트 파일 복사
 COPY . .
 
-# Expo DevTools와 Metro Bundler에 필요한 포트 노출
+# 필요한 포트 노출
 EXPOSE 19000 19001 19002
 
-# 소스 코드 복사
-
-
-# ======런타임 스테이지=======
-# Expo 프로젝트 초기화 (필요한 경우)
-RUN yarn expo install
-
-# Expo 개발 서버 시작
+# 기본 명령어로 애플리케이션 실행
 CMD ["npx", "expo", "start", "--tunnel"]
