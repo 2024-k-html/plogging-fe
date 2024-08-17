@@ -6,9 +6,10 @@ WORKDIR /app
 
 # package.json 및 yarn.lock을 복사하여 종속성을 설치
 COPY package.json yarn.lock ./
+RUN yarn install
 
-# Expo CLI를 글로벌하게 설치
-RUN yarn global add expo-cli
+# Expo CLI 및 ngrok 패키지를 미리 설치
+RUN yarn add @expo/ngrok
 
 # 앱 소스 코드를 복사
 COPY . .
@@ -17,4 +18,4 @@ COPY . .
 EXPOSE 19000 19001 19002
 
 # Expo 개발 서버 시작
-CMD ["expo", "start", "--tunnel"]
+CMD ["npx", "expo", "start", "--tunnel", "--non-interactive"]
