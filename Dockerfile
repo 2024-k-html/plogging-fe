@@ -1,21 +1,23 @@
 # Base image
-FROM node:18-buster
+FROM node:18-slim
+
+# Install yarn
+RUN npm install -g yarn
 
 # Set working directory
 WORKDIR /app
 
-# Set Expo CLI cache directory
-ENV EXPO_CLI_CACHE_DIR=/root/.expo
-
-# Install expo-cli globally
-RUN npm install -g expo-cli
+# Copy package.json and yarn.lock
+COPY package.json yarn.lock ./
 
 # Install dependencies
-COPY package*.json ./
-RUN npm install
+RUN yarn install --frozen-lockfile
 
-# Copy project files
+# Copy the rest of the application code
 COPY . .
 
-# Start the application
-CMD ["expo", "start", "--tunnel"]
+# Expose the port Expo will use (default 19000)
+EXPOSE 19000
+
+# Start the Expo server
+CMD ["yarn", "start"]
