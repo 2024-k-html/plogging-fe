@@ -12,8 +12,6 @@ COPY . .
 # Expo DevTools와 Metro Bundler에 필요한 포트 노출
 EXPOSE 19000 19001 19002
 
-RUN yarn build
-
 # 소스 코드 복사
 
 
