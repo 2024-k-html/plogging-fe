@@ -1,6 +1,9 @@
 # 안정적인 Node.js 18 LTS 버전 사용
 FROM node:18
 
+# 글로벌로 최신 ngrok 설치
+RUN npm install -g ngrok
+
 # 컨테이너 내 작업 디렉토리 설정
 WORKDIR /app
 
@@ -16,9 +19,5 @@ COPY . .
 # 필요한 포트 노출
 EXPOSE 19000 19001 19002
 
-# 글로벌로 @expo/ngrok 설치 (옵션)
-RUN npm install -g @expo/ngrok
-
 # 기본 명령어로 애플리케이션 실행
-CMD ["npx", "expo", "start", "--lan"]
-
+CMD ["npx", "expo", "start", "--tunnel"]
