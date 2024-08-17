@@ -6,7 +6,6 @@ WORKDIR /app
 
 # package.json 및 yarn.lock을 복사하여 종속성을 설치
 COPY package.json yarn.lock ./
-RUN yarn install
 
 # Expo CLI 및 ngrok 패키지를 미리 설치
 RUN yarn add @expo/ngrok
