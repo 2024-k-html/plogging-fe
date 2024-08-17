@@ -1,23 +1,21 @@
-# 안정적인 Node.js 18 LTS 버전 사용
-FROM node:18
+# Base image
+FROM node:18-bullseye-slim
 
-# 글로벌로 최신 ngrok 설치
-RUN npm install -g ngrok @expo/ngrok
-
-# 컨테이너 내 작업 디렉토리 설정
+# Set working directory
 WORKDIR /app
 
-# 의존성 파일만 복사하여 캐싱 최적화
-COPY package.json yarn.lock ./
+# Install expo-cli globally
+RUN npm install -g expo-cli
 
-# 의존성 설치
-RUN yarn install
+# Install app dependencies
+COPY package*.json ./
+RUN npm install
 
-# 나머지 프로젝트 파일 복사
+# Copy the rest of the application code
 COPY . .
 
-# 필요한 포트 노출
-EXPOSE 19000 19001 19002
+# Expose port for Metro bundler
+EXPOSE 19000
 
-# 기본 명령어로 애플리케이션 실행
-CMD ["npx", "expo", "start", "--tunnel"]
+# Start Expo
+CMD ["expo", "start", "--tunnel"]
