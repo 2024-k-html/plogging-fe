@@ -1,7 +1,7 @@
 # Base image
 FROM node:18-slim
 
-# Install yarn
+# Check if yarn is already installed, if not install it
 RUN npm install -g yarn
 
 # Set working directory
