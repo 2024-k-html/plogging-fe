@@ -9,10 +9,11 @@ ENV CI=1
 # 패키지 설치
 COPY package.json yarn.lock ./
 RUN yarn install
-RUN yarn global add @expo/ngrok
+RUN yarn add @expo/ngrok@4.1.0
+
 
 # 앱 소스 코드 복사
 COPY . .
 
 # Expo 프로젝트 시작
-CMD ["npx", "expo", "start", "--no-interactive"]
+CMD ["npx", "expo", "start", "--no-interactive", "--tunnel", "--ci"]
