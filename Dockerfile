@@ -3,7 +3,11 @@ FROM node:18-slim
 
 # Check if yarn is already installed, if not install it
 # RUN npm install -g yarn
+# Install Expo CLI globally
+RUN yarn global add expo-cli
 
+# Install @expo/ngrok globally
+RUN yarn global add @expo/ngrok
 # Set working directory
 WORKDIR /app
 
