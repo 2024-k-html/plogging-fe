@@ -1,5 +1,5 @@
 # Base image
-FROM node:18-bullseye-slim
+FROM node:16-alpine
 
 # Set working directory
 WORKDIR /app
@@ -7,15 +7,12 @@ WORKDIR /app
 # Install expo-cli globally
 RUN npm install -g expo-cli
 
-# Install app dependencies
+# Install dependencies
 COPY package*.json ./
 RUN npm install
 
-# Copy the rest of the application code
+# Copy project files
 COPY . .
 
-# Expose port for Metro bundler
-EXPOSE 19000
-
-# Start Expo
+# Start the application
 CMD ["expo", "start", "--tunnel"]
