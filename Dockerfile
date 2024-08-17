@@ -1,8 +1,11 @@
 # Base image
-FROM node:16-alpine
+FROM node:16-buster
 
 # Set working directory
 WORKDIR /app
+
+# Set Expo CLI cache directory
+ENV EXPO_CLI_CACHE_DIR=/root/.expo
 
 # Install expo-cli globally
 RUN npm install -g expo-cli
