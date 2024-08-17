@@ -20,5 +20,5 @@ EXPOSE 19000 19001 19002
 RUN npm install -g @expo/ngrok
 
 # 기본 명령어로 애플리케이션 실행
-CMD ["npx", "expo", "start", "--tunnel"]
+CMD ["npx", "expo", "start", "--lan"]
 
