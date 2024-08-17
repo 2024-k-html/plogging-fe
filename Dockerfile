@@ -1,13 +1,12 @@
 # Base image
 FROM node:18-slim
 
-# Check if yarn is already installed, if not install it
-# RUN npm install -g yarn
-# Install Expo CLI globally
-RUN yarn global add expo-cli
+# Install Yarn globally
+RUN if ! command -v yarn >/dev/null 2>&1; then npm install -g yarn; fi
 
 # Install @expo/ngrok globally
 RUN yarn global add @expo/ngrok
+
 # Set working directory
 WORKDIR /app
 
@@ -23,5 +22,5 @@ COPY . .
 # Expose the port Expo will use (default 19000)
 EXPOSE 19000
 
-# Start the Expo server
-CMD ["yarn", "start"]
+# Start the Expo server using npx
+CMD ["npx", "expo", "start", "--non-interactive", "--tunnel=false"]
