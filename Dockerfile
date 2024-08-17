@@ -2,7 +2,7 @@
 FROM node:18
 
 # 글로벌로 최신 ngrok 설치
-RUN npm install -g ngrok
+RUN npm install -g ngrok @expo/ngrok
 
 # 컨테이너 내 작업 디렉토리 설정
 WORKDIR /app
