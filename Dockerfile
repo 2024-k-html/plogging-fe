@@ -2,7 +2,7 @@
 FROM node:18-slim
 
 # Check if yarn is already installed, if not install it
-RUN npm install -g yarn
+# RUN npm install -g yarn
 
 # Set working directory
 WORKDIR /app
