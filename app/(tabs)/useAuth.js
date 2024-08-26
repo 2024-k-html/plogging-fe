@@ -36,7 +36,7 @@ const useAuth = () => {
   const login = useCallback(async ({ id, password }) => {
     try {
       const response = await axios.post(
-        'https://api.studyroom.computer.hufs.ac.kr/auth/login',
+        'http://222.232.240.42:8082/auth/login',
         {
           username: id,
           password: password,

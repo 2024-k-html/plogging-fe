@@ -60,7 +60,7 @@ const SignUp = ({ navigation }) => {
     }
 
     const response = await axios.post(
-      'http://hwangbbang.koreacentral.cloudapp.azure.com:8080/users/sign-up',
+      'http://222.232.240.42:8082/users/sign-up',
       {
         username: userId,
         password: password,
