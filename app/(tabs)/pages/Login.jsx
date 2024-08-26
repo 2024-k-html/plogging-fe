@@ -14,22 +14,29 @@ import {
   KeyboardAvoidingView,
   Platform,
 } from 'react-native';
+import useAuth from '../useAuth'; // useAuth 훅을 import
 
 const plogging_icon = require('../../../assets/image/ploggingIcon2.png');
 
 const Login = ({ navigation }) => {
   const [userId, setUserId] = useState('');
   const [password, setPassword] = useState('');
+  const { login } = useAuth(); // useAuth 훅에서 login 함수를 가져옴
 
-  const handleSignUpPress = () => {
+  const handleLoginPress = async () => {
     if (!userId || !password) {
       Alert.alert('입력 오류', '아이디와 비밀번호를 모두 입력해주세요');
       return;
     }
 
-    // 회원가입 처리 로직
-    Alert.alert('회원가입 성공', '회원가입이 완료되었습니다.');
-    navigation.navigate('home');
+    try {
+      // 로그인 함수 호출
+      await login({ id: userId, password });
+      Alert.alert('로그인 성공', '로그인 되었습니다.');
+      navigation.navigate('Home'); // 로그인 성공 시 홈 화면으로 이동
+    } catch (error) {
+      Alert.alert('로그인 오류', error.message || '로그인에 실패했습니다.');
+    }
   };
 
   return (
@@ -73,7 +80,7 @@ const Login = ({ navigation }) => {
           </View>
           <TouchableOpacity
             className="bg-green rounded-md mt-10"
-            onPress={handleSignUpPress}
+            onPress={handleLoginPress}
           >
             <Text className="text-center text-white py-4 text-xl shadow-lg">
               로그인
